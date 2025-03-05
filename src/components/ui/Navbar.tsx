@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '../assets/dirlogo.png';
-import searchIcon from '../assets/search_icon.png';
-import profileIcon from '../assets/profile_icon.png';
-import cartIcon from '../assets/cart_icon.png';
-import menuIcon from '../assets/menu_icon.png';
-import dropdownIcon from '../assets/dropdown_icon.png';
+import logo from '../../assets/dirlogo.png';
+import searchIcon from '../../assets/search_icon.png';
+import profileIcon from '../../assets/profile_icon.png';
+import cartIcon from '../../assets/cart_icon.png';
+import menuIcon from '../../assets/menu_icon.png';
+import dropdownIcon from '../../assets/dropdown_icon.png';
 
 const Navbar: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <div className="flex items-center justify-between py-5 font-medium">
+    <div className="max-w-7xl mx-auto flex items-center justify-between py-5 font-medium">
       <img src={logo} alt="Logo" className="w-20" />
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         <NavLink to="/" className="flex flex-col items-center gap-1">
