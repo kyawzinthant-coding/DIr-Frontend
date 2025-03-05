@@ -1,10 +1,11 @@
 import { Navigate, useRoutes } from 'react-router-dom';
+import Home from './Home';
 
 export default function Admin() {
   return useRoutes([
     {
       path: '/',
-      element: <Navigate to="/Home" replace />,
+      element: <Home />,
     },
 
     {
