@@ -1,14 +1,20 @@
+import Footer from '@/components/layouts/Footer';
 import Navbar from '@/components/layouts/Navbar';
 
 import { Outlet } from 'react-router-dom';
 
 function RootLayout() {
   return (
-    <div className="">
-      <Navbar />
-      <main className="mt-16 flex-1">
+    <div className=" main-h-screen flex flex-col">
+      <div>
+        <Navbar />
+      </div>
+
+      <main className=" flex-1">
         <Outlet />
       </main>
+
+      <Footer />
     </div>
   );
 }
