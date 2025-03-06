@@ -1,4 +1,4 @@
-import Navbar from '../components/ui/Navbar';
+import Navbar from '../components/layouts/Navbar';
 
 const Home: React.FC = () => {
   return (
