@@ -11,8 +11,9 @@ const Navbar: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <div className="max-w-7xl mx-auto flex items-center justify-between py-5 font-medium">
+    <div className="max-w-7xl mx-auto flex  items-center justify-between py-5 font-medium">
       <img src={logo} alt="Logo" className="w-20" />
+
       <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
         <NavLink to="/" className="flex flex-col items-center gap-1">
           <p>HOME</p>
@@ -31,6 +32,7 @@ const Navbar: React.FC = () => {
           <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         </NavLink>
       </ul>
+
       <div className="flex items-center gap-6">
         <img src={searchIcon} className="w-5 cursor-pointer" alt="Search" />
         <div className="group relative">

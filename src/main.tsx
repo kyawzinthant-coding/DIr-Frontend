@@ -5,6 +5,8 @@ import { RouterProvider } from 'react-router-dom';
 import { QueryProviders } from './provider/QueryProvider.tsx';
 import { router } from './routes.tsx';
 
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryProviders>
