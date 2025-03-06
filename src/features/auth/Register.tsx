@@ -1,8 +1,8 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import RegisterForm from './components/RegisterForm';
 
-import LoginForm from './components/LoginForm';
-
-function Login() {
+function Register() {
   return (
     <div className="relative">
       <Link
@@ -11,20 +11,13 @@ function Login() {
       >
         <img src="/src/assets/dirlogo.png" alt="Dir Logo" />
       </Link>
-      <main className="grid min-h-screen grid-cols-1 lg:grid-cols-2">
+      <main className="grid min-h-screen grid-cols-1 ">
         <div className="flex w-full place-items-center px-4">
-          <LoginForm />
-        </div>
-        <div className="relative hidden lg:block bg-red-400">
-          {/* <img
-            src={Banner}
-            alt="Furniture Shop"
-            className="absolute inset-0 h-full w-full object-cover"
-          /> */}
+          <RegisterForm />
         </div>
       </main>
     </div>
   );
 }
 
-export default Login;
+export default Register;
