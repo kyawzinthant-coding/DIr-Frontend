@@ -1,24 +1,25 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import hero from '../assets/insiderImages/hero.png';
 
 function HeroSection() {
   return (
-    <section className="w-full lg:px-32 py-12 md:py-24 lg:py-32 xl:py-21">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-          <div className="flex flex-col justify-center space-y-4">
-            <div className="space-y-2">
+    <section className="w-full lg:px-2 py-0 md:py-7 lg:py-4 xl:py-6">
+      <div className="container px-0 md:px-4">
+        <div className="grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+          <div className="flex flex-col justify-center space-y-6">
+            <div className="space-y-4">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-                Learn Without Limits
+                Inspire Young Minds with Engaging Learning!
               </h1>
-              <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                Start, switch, or advance your career with thousands of courses,
-                Professional Certificates, and degrees from world-class
-                universities and companies.
+              <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed">
+                Empower kids with interactive courses from Digital Kids &
+                National Geographic Learning & More. Fun, engaging, and designed
+                for young learners!
               </p>
             </div>
-            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+            <div className="flex flex-col gap-3 min-[400px]:flex-row">
               <Link to="/courses">
                 <Button size="lg" className="gap-1">
                   Explore Courses
@@ -27,17 +28,23 @@ function HeroSection() {
               </Link>
               <Link to="/signup">
                 <Button size="lg" variant="outline">
-                  Join for Free
+                  Get Started for Free
                 </Button>
               </Link>
             </div>
-            <div className="flex items-center space-x-4 text-sm">
-              <div className="text-muted-foreground">
-                Join over{' '}
-                <span className="font-medium text-foreground">10,000+</span>{' '}
-                learners
+            <div className="flex items-center space-x-4 text-sm mt-2">
+              <div className="text-muted-foreground leading-relaxed">
+                Trusted by parents and teachers worldwide. Find the perfect
+                learning resources for your child!
               </div>
             </div>
+          </div>
+          <div className="hidden lg:block">
+            <img
+              src={hero}
+              alt="Hero Image"
+              className="w-full h-full object-cover rounded-lg"
+            />
           </div>
         </div>
       </div>
