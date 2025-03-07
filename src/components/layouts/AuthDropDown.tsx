@@ -22,7 +22,7 @@ interface UserProps {
 function AuthDropDown({ user }: UserProps) {
   if (!user) {
     return (
-      <Button size="sm" asChild>
+      <Button className="cursor-pointer" size="sm" asChild>
         <Link to="/login">
           Sign In
           <span className="sr-only">Sign In</span>
