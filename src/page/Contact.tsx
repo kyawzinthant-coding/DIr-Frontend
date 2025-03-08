@@ -23,7 +23,8 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-500 to-blue-700 p-6">
+    // <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-500 to-blue-700 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-lines antialiased  h-full bg-gradient-to-r from-[#F3F6FF] to-white font-nunito overflow-x-hidden ">
       <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-5xl flex">
         {/* Left Side - Contact Form */}
         <div className="w-1/2 p-8">
