@@ -1,7 +1,6 @@
 import Footer from '@/components/layouts/Footer';
 import Navbar from '@/components/layouts/Navbar';
 import { Outlet, useLocation } from 'react-router-dom';
-import ScrollToTop from '@/components/layouts/ScrollToTop';
 import { useEffect } from 'react';
 
 function RootLayout() {

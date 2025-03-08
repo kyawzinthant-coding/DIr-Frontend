@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="w-full flex flex-row justify-center  bg-background">
+    <footer className="w-full flex flex-row justify-center  bg-lines antialiased  h-full bg-gradient-to-r from-[#F3F6FF] to-white ">
       <div className="container px-4 py-12 md:px-6 md:py-16 lg:py-12">
         <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
           <div className="flex flex-col gap-2 lg:col-span-2">
