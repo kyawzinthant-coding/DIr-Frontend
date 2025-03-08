@@ -5,6 +5,7 @@ import ErrorPage from '@/page/Error';
 import RootLayout from '@/page/RootLayout';
 import { Login } from './routes/elements';
 import Register from './features/auth/Register';
+import Collection from './page/Collection';
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact />,
+      },
+      {
+        path: 'collection',
+        element: <Collection />,
       },
     ],
   },

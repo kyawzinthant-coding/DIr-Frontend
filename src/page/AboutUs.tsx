@@ -16,6 +16,12 @@ function AboutUs() {
 
   return (
     <section ref={ref} className="py-16 bg-gray-50">
+      <div className="flex flex-col items-center text-center mb-10">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          About Us
+        </h2>
+        <div className="w-20 h-1 bg-orange-500 mt-4 mb-6 rounded-full"></div>
+      </div>
       <div className="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
