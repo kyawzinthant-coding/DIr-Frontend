@@ -53,9 +53,9 @@ export default function OurServices() {
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center hidden">
           <div className="inline-flex items-center p-1 px-2 bg-orange-100 rounded-full text-sm text-orange-700">
-            <span className="px-2 py-1 bg-orange-500 text-white rounded-full mr-2">
+            <span className="px-2 py-1 bg-orange-500 text-white rounded-full mr-2 ">
               New
             </span>
             Now offering specialized certification programs for professionals

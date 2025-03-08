@@ -1,31 +1,20 @@
-import Footer from '@/components/layouts/Footer';
+import { Outlet } from 'react-router-dom';
 import Navbar from '@/components/layouts/Navbar';
-import { Outlet, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import Footer from '@/components/layouts/Footer';
+import * as Toast from '@radix-ui/react-toast';
 
-function RootLayout() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
+export default function RootLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <div>
+    <Toast.Provider swipeDirection="right">
+      {' '}
+      <div className="min-h-screen flex flex-col">
         <Navbar />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-
-      <main className="flex-1">
-        <Outlet />
-      </main>
-
-      <Footer />
-    </div>
+      <Toast.Viewport className="fixed bottom-5 right-5 flex flex-col gap-2 w-96 max-w-full p-4 outline-none" />
+    </Toast.Provider>
   );
 }
-
-export default RootLayout;
