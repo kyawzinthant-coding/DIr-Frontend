@@ -172,7 +172,7 @@ const ContactUs = () => {
                 href="mailto:digitalinformationresources@gmail.com"
                 className="text-white hover:underline"
               >
-                digitalinformationresources@gmail.com
+                cs@dir.com.mm
               </a>
             </div>
             <div>
