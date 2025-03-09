@@ -5,6 +5,8 @@ import closeupHeader from '../insiderImages/NewCloseUpCover.jpeg';
 import LookL1 from '../LookSeries/LookCV-Level1.jpg';
 import LookL2 from '../LookSeries/LookCV-Level2.jpg';
 import LookL3 from '../LookSeries/LookCV-Level3.jpg';
+import DKStarter from '../DK/Starter.jpg';
+import DKRacer from '../DK/Racer.jpg';
 
 export type Course = {
   id: number;
@@ -118,16 +120,21 @@ export const educationalProviders: Provider[] = [
     series: [
       {
         id: 201,
-        name: 'Artificial Intelligence',
+        name: 'Digital Kids Series',
         category: 'ICT',
         coverImage: 'https://via.placeholder.com/400x200?text=AI+Series+Cover',
         courses: [
           {
             id: 2010,
-            name: 'Introduction to Deep Learning',
+            name: 'Digital Kids Series - Starter',
             duration: '4 Weeks',
-            coverImage:
-              'https://via.placeholder.com/400x200?text=Deep+Learning',
+            coverImage: DKStarter,
+          },
+          {
+            id: 2011,
+            name: 'Digital Kids Series - Racer',
+            duration: '4 Weeks',
+            coverImage: DKRacer,
           },
         ],
       },

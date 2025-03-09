@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import hero from '../assets/insiderImages/hero.png';
 
 function HeroSection() {

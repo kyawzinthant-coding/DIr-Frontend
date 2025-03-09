@@ -16,6 +16,7 @@ import { emailCheckLoader, loginLoader } from './router/loader';
 import SignUpPage from '@/features/auth/SignUp';
 import AuthRootLayout from '@/features/auth/AuthRootLayout';
 import Register from './features/auth/Register';
+import Product from './page/Product';
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: 'collection',
         element: <Collection />,
+      },
+      {
+        path: 'product',
+        element: <Product />,
       },
     ],
   },
