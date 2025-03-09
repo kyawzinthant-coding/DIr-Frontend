@@ -1,9 +1,4 @@
-import {
-  Link,
-  // useSubmit,
-  useNavigation,
-  useActionData,
-} from 'react-router-dom';
+import { Link, useSubmit, useNavigation, useActionData } from 'react-router';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -40,7 +35,7 @@ const FormSchema = z.object({
 });
 
 export default function LoginForm() {
-  // const submit = useSubmit();
+  const submit = useSubmit();
   const navigation = useNavigation();
   const actionData = useActionData() as { error?: string; message?: string };
 
@@ -55,8 +50,7 @@ export default function LoginForm() {
   });
 
   function onSubmit(values: z.infer<typeof FormSchema>) {
-    console.log(values);
-    // submit(values, { method: 'post', action: '/login' });
+    submit(values, { method: 'post', action: '/login' });
   }
 
   return (

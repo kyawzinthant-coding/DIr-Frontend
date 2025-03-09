@@ -10,7 +10,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export default function Footer() {
   return (

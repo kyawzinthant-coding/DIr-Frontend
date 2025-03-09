@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { User } from '@/Types';
-import { Form, Link } from 'react-router-dom';
+import { Form, Link } from 'react-router';
 
 interface UserProps {
   user: User | null;
