@@ -2,6 +2,7 @@ import Footer from '@/components/layouts/Footer';
 import Navbar from '@/components/layouts/Navbar';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import * as Toast from '@radix-ui/react-toast';
 
 function RootLayout() {
   const { pathname } = useLocation();
@@ -25,6 +26,7 @@ function RootLayout() {
 
       <Footer />
     </div>
+    
   );
 }
 
