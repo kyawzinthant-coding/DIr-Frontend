@@ -5,15 +5,16 @@ import searchIcon from '../../assets/search_icon.png';
 import cartIcon from '../../assets/cart_icon.png';
 
 import AuthDropDown from './AuthDropDown';
+import { User } from '@/Types';
 
 const Navbar: React.FC = () => {
-  // const user: User = {
-  //   id: '1',
-  //   username: 'Brian',
-  //   email: 'kyawthant035@gmail.com',
-  // };
+  const user: User = {
+    id: '1',
+    username: 'Brian',
+    email: 'kyawthant035@gmail.com',
+  };
 
-  const user = null;
+  // const user = null;
 
   return (
     <header className="fixed top-0 z-50 w-full border-b bg-background">
