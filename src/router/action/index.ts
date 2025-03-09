@@ -38,3 +38,25 @@ export const logoutAction = async () => {
     return { error: 'Logout failed' };
   }
 };
+
+export const registerAction = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const email = formData.get('email');
+
+  try {
+    // Send request to check if email is available
+    await authApi.post('auth/check-email', { email });
+
+    // If no error, email is available → Continue registration
+    return redirect('/register/create-account');
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.status === 400) {
+        // If email exists, redirect to login with pre-filled email
+        return redirect(`/login?email=${encodeURIComponent(email as string)}`);
+      }
+      return error.response?.data || { error: 'Something went wrong!' };
+    }
+    throw error;
+  }
+};

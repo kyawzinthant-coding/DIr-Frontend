@@ -80,7 +80,6 @@ export default function LoginForm() {
                       type="email"
                       inputMode="email"
                       placeholder="example@example.com"
-                      required
                       {...field}
                     />
                   </FormControl>
