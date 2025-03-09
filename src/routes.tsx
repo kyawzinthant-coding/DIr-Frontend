@@ -4,10 +4,12 @@ import Contact from '@/page/Contact';
 import ErrorPage from '@/page/Error';
 import RootLayout from '@/page/RootLayout';
 import Login from './features/auth/Login';
-import Register from './features/auth/Register';
+// import Register from './features/auth/Register';
 import Collection from './page/Collection';
-import { loginAction, logoutAction } from './router/action';
+import { loginAction, logoutAction, registerAction } from './router/action';
 import { loginLoader } from './router/loader';
+import SignUpPage from '@/features/auth/SignUp';
+import AuthRootLayout from '@/features/auth/AuthRootLayout';
 
 export const router = createBrowserRouter([
   {
@@ -37,7 +39,15 @@ export const router = createBrowserRouter([
   },
   {
     path: '/register',
-    element: <Register />,
+    element: <AuthRootLayout />,
+    children: [
+      {
+        index: true,
+        element: <SignUpPage />,
+        loader: loginLoader,
+        action: registerAction,
+      },
+    ],
   },
   {
     path: '/logout',
