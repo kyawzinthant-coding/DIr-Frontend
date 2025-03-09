@@ -2,7 +2,7 @@ import Footer from '@/components/layouts/Footer';
 import Navbar from '@/components/layouts/Navbar';
 import { Button } from '@/components/ui/button';
 import { Bug, Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 function ErrorPage() {
   return (
