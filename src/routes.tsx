@@ -6,7 +6,7 @@ import RootLayout from '@/page/RootLayout';
 import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import Collection from './page/Collection';
-import { loginAction } from './router/action';
+import { loginAction, logoutAction } from './router/action';
 
 export const router = createBrowserRouter([
   {
@@ -36,5 +36,9 @@ export const router = createBrowserRouter([
   {
     path: '/register',
     element: <Register />,
+  },
+  {
+    path: '/logout',
+    action: logoutAction,
   },
 ]);
