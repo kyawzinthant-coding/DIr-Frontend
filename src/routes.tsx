@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, redirect } from 'react-router';
 import Home from '@/page/Home';
 import Contact from '@/page/Contact';
 import ErrorPage from '@/page/Error';
@@ -7,6 +7,7 @@ import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import Collection from './page/Collection';
 import { loginAction, logoutAction } from './router/action';
+import { loginLoader } from './router/loader';
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
     path: '/login',
     element: <Login />,
     action: loginAction,
+    loader: loginLoader,
   },
   {
     path: '/register',
@@ -40,5 +42,6 @@ export const router = createBrowserRouter([
   {
     path: '/logout',
     action: logoutAction,
+    loader: () => redirect('/'),
   },
 ]);
