@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router';
 import logo from '../../assets/dirlogo.png';
 import searchIcon from '../../assets/search_icon.png';
 

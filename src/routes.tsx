@@ -1,11 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router';
 import Home from '@/page/Home';
 import Contact from '@/page/Contact';
 import ErrorPage from '@/page/Error';
 import RootLayout from '@/page/RootLayout';
-import { Login } from './routes/elements';
+import Login from './features/auth/Login';
 import Register from './features/auth/Register';
 import Collection from './page/Collection';
+import { loginAction } from './router/action';
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,7 @@ export const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+    action: loginAction,
   },
   {
     path: '/register',
