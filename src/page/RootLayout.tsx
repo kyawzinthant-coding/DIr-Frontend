@@ -5,6 +5,7 @@ import * as Toast from '@radix-ui/react-toast';
 import { fetchMe } from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export default function RootLayout() {
   const { data: user } = useQuery({
@@ -14,9 +15,9 @@ export default function RootLayout() {
     retry: false, // Don't retry if failed
   });
 
-  // Store user in Zustand
-  const setUser = useAuthDataStore((state) => state.setUser);
-  setUser(user || null);
+  useEffect(() => {
+    useAuthDataStore.getState().setUser(user || null);
+  }, [user]);
 
   return (
     <Toast.Provider swipeDirection="right">

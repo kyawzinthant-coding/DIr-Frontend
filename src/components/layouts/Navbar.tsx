@@ -9,15 +9,7 @@ import AuthDropDown from './AuthDropDown';
 import { useAuthDataStore } from '@/store/authData';
 
 const Navbar: React.FC = () => {
-  // const user: User = {
-  //   id: '1',
-  //   username: 'Brian',
-  //   email: 'kyawthant035@gmail.com',
-  // };
-
   const { user } = useAuthDataStore();
-
-  console.log(user);
 
   return (
     <header className="fixed top-0 z-50 w-full border-b bg-background">
