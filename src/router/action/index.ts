@@ -1,6 +1,7 @@
 import api, { authApi } from '@/api';
 import { redirect, ActionFunctionArgs } from 'react-router';
 import { AxiosError } from 'axios';
+import useAuthStore, { Status } from '@/store/authStore';
 
 export const loginAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -40,15 +41,21 @@ export const logoutAction = async () => {
 };
 
 export const registerAction = async ({ request }: ActionFunctionArgs) => {
+  const authStore = useAuthStore.getState();
   const formData = await request.formData();
   const email = formData.get('email');
 
   try {
     // Send request to check if email is available
-    await authApi.post('auth/check-email', { email });
+    const response = await authApi.post('auth/check-email', { email });
 
+    if (response.status !== 200) {
+      return { error: response.data || 'Email check failed' };
+    }
+
+    authStore.setAuth(email as string, '', Status.email);
     // If no error, email is available → Continue registration
-    return redirect('/register/create-account');
+    return redirect('/register/form');
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response?.status === 400) {

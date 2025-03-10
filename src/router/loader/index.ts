@@ -1,4 +1,6 @@
+import { Status } from './../../store/authStore';
 import { authApi } from '@/api';
+import useAuthStore from '@/store/authStore';
 import { redirect } from 'react-router';
 
 export const loginLoader = async () => {
@@ -12,4 +14,14 @@ export const loginLoader = async () => {
   } catch (error) {
     console.log('Loader error', error);
   }
+};
+
+export const emailCheckLoader = async () => {
+  const authStore = useAuthStore.getState();
+
+  if (authStore.status !== Status.email && authStore.email === null) {
+    return redirect('/register');
+  }
+
+  return null;
 };
