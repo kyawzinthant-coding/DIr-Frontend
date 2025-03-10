@@ -20,7 +20,7 @@ function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row">
-              <Link to="/courses">
+              <Link to="/collection">
                 <Button size="lg" className="gap-1">
                   Explore Courses
                   <ArrowRight className="h-4 w-4" />
