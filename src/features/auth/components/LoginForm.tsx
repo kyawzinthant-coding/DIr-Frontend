@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import useAuthStore from '@/store/authStore';
 
 const FormSchema = z.object({
   email: z
@@ -39,12 +40,14 @@ export default function LoginForm() {
   const navigation = useNavigation();
   const actionData = useActionData() as { error?: string; message?: string };
 
+  const email = useAuthStore((state) => state.email);
+
   const isSubmitting = navigation.state === 'submitting';
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: '',
+      email: email || '',
       password: '',
     },
   });

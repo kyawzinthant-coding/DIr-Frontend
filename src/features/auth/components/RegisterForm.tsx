@@ -1,4 +1,4 @@
-import { Link } from 'react-router'; // Fixed import
+import { Link, useActionData, useNavigation, useSubmit } from 'react-router'; // Fixed import
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -44,9 +44,11 @@ const RegisterSchema = z
 export default function RegisterForm() {
   // Get the email from Zustand store
   const email = useAuthStore((state) => state.email);
+  const navigation = useNavigation();
+  const submit = useSubmit();
+  const actionData = useActionData() as { error?: string; message?: string };
 
-  console.log(email);
-
+  const isSubmitting = navigation.state === 'submitting';
   // Initialize react-hook-form with Zod resolver
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -60,7 +62,7 @@ export default function RegisterForm() {
 
   // Handle form submission
   function onSubmit(values: z.infer<typeof RegisterSchema>) {
-    console.log('Submitted:', values);
+    submit(values, { method: 'post', action: '/register/form' });
   }
 
   return (
@@ -134,8 +136,17 @@ export default function RegisterForm() {
               )}
             />
 
-            <Button type="submit" className="w-full cursor-pointer">
-              Sign Up
+            {/* Error Message */}
+            {actionData?.message && (
+              <p className="text-sm text-red-500">{actionData.message}</p>
+            )}
+
+            <Button
+              type="submit"
+              className="mt-2 w-full cursor-pointer"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
         </Form>

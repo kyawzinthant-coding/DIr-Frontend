@@ -112,7 +112,7 @@ export function SignUpForm({
             )}
             <Button
               type="submit"
-              className="mt-2 w-full"
+              className="mt-2 w-full cursor-pointer"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Checking...' : 'Continue'}

@@ -6,11 +6,15 @@ import RootLayout from '@/page/RootLayout';
 import Login from './features/auth/Login';
 // import Register from './features/auth/Register';
 import Collection from './page/Collection';
-import { loginAction, logoutAction, registerAction } from './router/action';
+import {
+  createaccountAction,
+  loginAction,
+  logoutAction,
+  registerAction,
+} from './router/action';
 import { emailCheckLoader, loginLoader } from './router/loader';
 import SignUpPage from '@/features/auth/SignUp';
 import AuthRootLayout from '@/features/auth/AuthRootLayout';
-import RegisterForm from './features/auth/components/RegisterForm';
 import Register from './features/auth/Register';
 
 export const router = createBrowserRouter([
@@ -53,6 +57,7 @@ export const router = createBrowserRouter([
         path: 'form',
         element: <Register />,
         loader: emailCheckLoader,
+        action: createaccountAction,
       },
     ],
   },

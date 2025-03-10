@@ -34,7 +34,10 @@ function AuthDropDown({ user }: UserProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="secondary" className="size-8 rounded-full">
+        <Button
+          variant="secondary"
+          className="size-8 rounded-full cursor-pointer "
+        >
           <Avatar className="size-8">
             <AvatarFallback>B</AvatarFallback>
           </Avatar>
