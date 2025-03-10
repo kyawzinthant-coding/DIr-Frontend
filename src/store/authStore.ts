@@ -10,18 +10,16 @@ export enum Status {
 
 type State = {
   email: string | null;
-  token: string | null;
   status: Status;
 };
 
 const initialState: State = {
   email: null,
-  token: null,
   status: Status.none,
 };
 
 type Actions = {
-  setAuth: (email: string, token: string, status: Status) => void;
+  setAuth: (email: string, status: Status) => void;
   clearAuth: () => void;
 };
 
@@ -30,10 +28,9 @@ const useAuthStore = create<State & Actions>()(
     immer((set) => ({
       ...initialState,
 
-      setAuth: (email, token, status) =>
+      setAuth: (email, status) =>
         set((state) => {
           state.email = email || null;
-          state.token = token || null;
           state.status = status;
         }),
 
