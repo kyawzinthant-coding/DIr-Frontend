@@ -32,8 +32,8 @@ const useAuthStore = create<State & Actions>()(
 
       setAuth: (email, token, status) =>
         set((state) => {
-          state.email = email;
-          state.token = token;
+          state.email = email || null;
+          state.token = token || null;
           state.status = status;
         }),
 
