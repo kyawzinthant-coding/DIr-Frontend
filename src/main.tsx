@@ -7,7 +7,6 @@ import { router } from './routes.tsx';
 import { Toaster } from 'sonner';
 
 
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryProviders>

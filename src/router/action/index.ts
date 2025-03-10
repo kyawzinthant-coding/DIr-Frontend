@@ -35,6 +35,7 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
 export const logoutAction = async () => {
   try {
     await api.post('auth/logout');
+    await queryClient.invalidateQueries({ queryKey: ['me'] });
     useAuthDataStore.getState().setUser(null);
     return redirect('/login');
   } catch (error) {

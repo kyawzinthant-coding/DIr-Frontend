@@ -40,7 +40,7 @@ function AuthDropDown({ user }: UserProps) {
         >
           <Avatar className="size-8">
             <AvatarImage src="/src/assets/avatar.jpeg" alt={user.username} />
-            <AvatarFallback>B</AvatarFallback>
+            <AvatarFallback>{}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

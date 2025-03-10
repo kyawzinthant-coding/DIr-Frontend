@@ -11,6 +11,8 @@ export const loginLoader = async () => {
   try {
     const response = await authApi.get('auth/auth-check');
 
+    console.log(response);
+
     if (response.status !== 200) {
       return null;
     }
