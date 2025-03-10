@@ -63,7 +63,7 @@ const Collection = () => {
     'transition-transform duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(255,165,0,0.8)]';
 
   return (
-    <div className="min-h-screen mt-16 flex relative">
+    <div className="min-h-screen mt-20 flex relative">
       {/* Sidebar / Filters */}
       <aside className="w-1/4 p-6 shadow-lg bg-blue-800">
         <h2 className="text-xl font-bold mb-4 text-white">Filters</h2>
