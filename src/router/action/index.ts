@@ -67,3 +67,33 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
     throw error;
   }
 };
+
+export const createaccountAction = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+  const username = formData.get('username');
+  const email = formData.get('email');
+  const password = formData.get('password');
+
+  const authData = {
+    username,
+    email,
+    password,
+  };
+
+  try {
+    const response = await authApi.post('auth/register', authData);
+
+    if (response.status !== 201 && response.status !== 200) {
+      return { error: response.data || 'Registration failed' };
+    }
+
+    const redirectTo = new URL(request.url).searchParams.get('redirect') || '/';
+
+    return redirect(redirectTo);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      return error.response?.data || { error: 'Registered Failed!' };
+    }
+    throw error;
+  }
+};
