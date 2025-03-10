@@ -11,7 +11,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { User } from '@/Types';
 import { Form, Link } from 'react-router';
 
@@ -39,6 +39,7 @@ function AuthDropDown({ user }: UserProps) {
           className="size-8 rounded-full cursor-pointer "
         >
           <Avatar className="size-8">
+            <AvatarImage src="/src/assets/avatar.jpeg" alt={user.username} />
             <AvatarFallback>B</AvatarFallback>
           </Avatar>
         </Button>
@@ -46,9 +47,9 @@ function AuthDropDown({ user }: UserProps) {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">Brian thant</p>
+            <p className="text-sm font-medium leading-none">{user.username}</p>
             <p className="text-sm leading-none text-muted-foreground">
-              kyawthant035@gmail.com
+              {user.email}
             </p>
           </div>
         </DropdownMenuLabel>

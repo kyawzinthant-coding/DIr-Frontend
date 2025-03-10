@@ -2,6 +2,8 @@ import api, { authApi } from '@/api';
 import { redirect, ActionFunctionArgs } from 'react-router';
 import { AxiosError } from 'axios';
 import useAuthStore, { Status } from '@/store/authStore';
+import { useAuthDataStore } from '@/store/authData';
+import { queryClient } from '@/lib/queryClient';
 
 export const loginAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -19,7 +21,7 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
     if (response.status !== 200) {
       return { error: response.data || 'Login Failed!' };
     }
-
+    await queryClient.invalidateQueries({ queryKey: ['me'] });
     const redirectTo = new URL(request.url).searchParams.get('redirect') || '/';
 
     return redirect(redirectTo);
@@ -33,6 +35,7 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
 export const logoutAction = async () => {
   try {
     await api.post('auth/logout');
+    useAuthDataStore.getState().setUser(null);
     return redirect('/login');
   } catch (error) {
     console.error('Logout failed:', error);
@@ -53,7 +56,7 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
       return { error: response.data || 'Email check failed' };
     }
 
-    authStore.setAuth(email as string, '', Status.email);
+    authStore.setAuth(email as string, Status.email);
     // If no error, email is available → Continue registration
     return redirect('/register/form');
   } catch (error) {
@@ -69,6 +72,7 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
 };
 
 export const createaccountAction = async ({ request }: ActionFunctionArgs) => {
+  const authStore = useAuthStore.getState();
   const formData = await request.formData();
   const username = formData.get('username');
   const email = formData.get('email');
@@ -87,6 +91,7 @@ export const createaccountAction = async ({ request }: ActionFunctionArgs) => {
       return { error: response.data || 'Registration failed' };
     }
 
+    authStore.clearAuth();
     const redirectTo = new URL(request.url).searchParams.get('redirect') || '/';
 
     return redirect(redirectTo);
