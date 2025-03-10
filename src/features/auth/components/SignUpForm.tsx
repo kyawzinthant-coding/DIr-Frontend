@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Icons } from '@/components/icons';
+;
 
 const emailRegex =
   /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|org|net|edu|gov|co|io|info|biz|co.uk|us)$/;
@@ -70,13 +70,15 @@ export function SignUpForm({
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <div className="flex flex-col gap-6">
         <div className="flex flex-col items-center gap-2">
-          <Link to="#" className="flex flex-col items-center gap-2 font-medium">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md">
-              <Icons.logo className="mr-2 h-6 w-6" aria-hidden="true" />
-            </div>
-            <span className="sr-only">Dir</span>
-          </Link>
-          <h1 className="text-xl font-bold">Welcome to Dir</h1>
+          <div className="relative z-20 flex items-center text-lg font-medium">
+            <Link
+              to="/"
+              className="fixed left-8 top-6 flex items-center text-lg font-bold tracking-tight text-foreground/80 transition-colors hover:text-foreground"
+            >
+              <img src="/src/assets/dirlogo.png" alt="Dir Logo" />
+            </Link>
+          </div>
+          <h1 className="text-xl font-bold">Welcome to DIR</h1>
           <div className="text-center text-sm">
             Already had an account?{' '}
             <a href="/login" className="underline underline-offset-4">
