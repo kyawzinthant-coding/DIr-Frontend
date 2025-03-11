@@ -17,8 +17,8 @@ const Navbar: React.FC = () => {
         <img src={logo} alt="Logo" className="w-28" />
 
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
-          {['/', '/collection', '/about', '/contact'].map((path, index) => {
-            const labels = ['HOME', 'COLLECTION', 'ABOUT', 'CONTACT'];
+          {['/', '/providers', '/about', '/contact'].map((path, index) => {
+            const labels = ['HOME', 'PROVIDERS', 'ABOUT', 'CONTACT'];
             return (
               <NavLink
                 key={path}

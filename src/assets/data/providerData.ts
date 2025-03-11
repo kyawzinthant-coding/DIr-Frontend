@@ -26,7 +26,7 @@ export type Series = {
 export type Provider = {
   id: number;
   name: string;
-  logo: { src: string; alt: string } | string;
+  logo: { src: string; alt: string };
   series: Series[];
 };
 

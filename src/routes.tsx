@@ -5,7 +5,7 @@ import ErrorPage from '@/page/Error';
 import RootLayout from '@/page/RootLayout';
 import Login from './features/auth/Login';
 // import Register from './features/auth/Register';
-import Collection from './page/Collection';
+
 import {
   createaccountAction,
   loginAction,
@@ -17,6 +17,11 @@ import SignUpPage from '@/features/auth/SignUp';
 import AuthRootLayout from '@/features/auth/AuthRootLayout';
 import Register from './features/auth/Register';
 import Product from './page/Product';
+import CollectionPage from './page/CollectionPage';
+import ProviderLayout from './features/course/ProviderLayout';
+import ProviderSeriesPage from './page/ProviderSeriesPage';
+import SeriesCoursePage from './page/SeriesCoursePage';
+import CourseDetailsPage from './page/CourseDetailsPage';
 
 export const router = createBrowserRouter([
   {
@@ -33,12 +38,35 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: 'collection',
-        element: <Collection />,
+        path: 'providers',
+        // element: <Collection />,
+        element: <ProviderLayout />,
+        children: [
+          {
+            index: true,
+            element: <CollectionPage />,
+          },
+          {
+            path: ':providerId/series',
+            element: <ProviderSeriesPage />,
+          },
+          {
+            path: ':providerId/series/:seriesId',
+            element: <SeriesCoursePage />,
+          },
+          {
+            path: ':providerId/series/:seriesId/courses/:courseId',
+            element: <CourseDetailsPage />,
+          },
+        ],
       },
       {
         path: 'product',
         element: <Product />,
+      },
+      {
+        path: 'collection-one',
+        element: <CollectionPage />,
       },
     ],
   },
