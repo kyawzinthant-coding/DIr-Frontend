@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { fetchMe } from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 import { useQuery } from '@tanstack/react-query';
+import ProgressBar from '@/components/progress-bar';
 
 function RootLayout() {
   const { data: user } = useQuery({
@@ -32,7 +33,7 @@ function RootLayout() {
       <div>
         <Navbar />
       </div>
-
+      <ProgressBar />
       <main className="flex-1">
         <Outlet />
       </main>

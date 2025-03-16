@@ -4,14 +4,19 @@ import { Button } from './ui/button';
 import { Provider } from '@/assets/data/providerData';
 
 const ProviderCard = ({ provider }: { provider: Provider }) => {
+
+  console.log(provider);
+  const imgURl = import.meta.env.VITE_IMG_URL;
   return (
     <Card className="h-full overflow-hidden  transition-all duration-300 hover:shadow-xl border-0 shadow-md rounded-2xl hover:scale-105">
       <div className="bg-gradient-to-br from-blue-50 to-purple-50  p-8 flex items-center justify-center h-52">
         <div className="w-40  relative flex items-center justify-center rounded-lg overflow-hidden">
           <img
-            src={provider.logo.src}
-            alt={provider.logo.alt}
-            className="object-contain max-w-full max-h-full transition-transform duration-300 hover:scale-110"
+            src={`${imgURl}${provider.image}`}
+            alt={provider.name}
+            loading="lazy"
+            decoding="async"
+            className="object-contain w-full h-full transition-transform duration-300 hover:scale-110"
           />
         </div>
       </div>
@@ -20,7 +25,9 @@ const ProviderCard = ({ provider }: { provider: Provider }) => {
           {provider.name}
         </h3>
         <p className="text-blue-600  text-center font-semibold">
-          {provider.series.length} Series Available
+          {provider._count.series > 0
+            ? `${provider._count.series} Series Available`
+            : 'No Series Available'}
         </p>
         <div className="mt-6 text-center">
           <Button className="bg-orange-600 cursor-pointer hover:bg-orange-700 rounded-xl px-8 py-3 h-auto text-base font-medium transition-colors duration-300 transform hover:scale-105">

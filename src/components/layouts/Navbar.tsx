@@ -9,11 +9,9 @@ import { useAuthDataStore } from '@/store/authData';
 const Navbar: React.FC = () => {
   const { user } = useAuthDataStore();
 
-  console.log(user);
-
   return (
-    <header className="fixed top-0 z-50 w-full border-b bg-background">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between py-2 font-medium">
+    <header className="fixed -top-0 z-50 w-full border-b mb-12 bg-background">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between  font-medium">
         <img src={logo} alt="Logo" className="w-28" />
 
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">

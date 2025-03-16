@@ -1,10 +1,10 @@
 import { queryClient } from '@/lib/queryClient';
 import { Status } from './../../store/authStore';
-import { authApi } from '@/api';
+import api, { authApi } from '@/api';
 import useAuthStore from '@/store/authStore';
 
 import { redirect } from 'react-router';
-import { fetchMe } from '@/api/query';
+import { fetchMe, providerQuery } from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 
 export const loginLoader = async () => {
@@ -46,4 +46,20 @@ export const authLoader = async () => {
     useAuthDataStore.getState().setUser(null);
     return null;
   }
+};
+
+export const collectionLoader = async () => {
+  try {
+    const response = await api.get('user/providers');
+    console.log(response.data);
+    return { providerData: response.data };
+  } catch (error) {
+    console.log('Collection Loader error', error);
+  }
+};
+
+// it will cache the data
+export const ProviderLoader = async () => {
+  await queryClient.ensureQueryData(providerQuery('?limits=8'));
+  return null;
 };

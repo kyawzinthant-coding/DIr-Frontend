@@ -23,14 +23,27 @@ export type Series = {
   courses: Course[];
 };
 
-export type Provider = {
+export type Provider2 = {
   id: number;
   name: string;
   logo: { src: string; alt: string };
   series: Series[];
 };
 
-export const educationalProviders: Provider[] = [
+export interface Provider {
+  id: number;
+  name: string;
+  image: string;
+  _count: {
+    series: number;
+  };
+}
+export interface ProviderWithSeries extends Provider {
+  countSeries: number;
+  series: Series[];
+}
+
+export const educationalProviders: Provider2[] = [
   {
     id: 1,
     name: 'National Geographic Learning',

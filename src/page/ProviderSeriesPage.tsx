@@ -18,10 +18,10 @@ export default function ProviderSeriesPage() {
 
   if (!provider) {
     return (
-      <div className="container mx-auto px-6 py-20 text-center">
+      <div className="container mx-auto px-6 py-20 mt-6 text-center">
         <h2 className="text-3xl font-bold text-gray-900">Provider not found</h2>
-        <Link to="/">
-          <Button className="mt-6 bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
+        <Link to="/providers">
+          <Button className="mt-6 bg-blue-600 cursor-pointer hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
             Return to Providers
           </Button>
         </Link>

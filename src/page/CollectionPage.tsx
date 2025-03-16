@@ -1,7 +1,10 @@
-import { educationalProviders } from '@/assets/data/providerData';
+import { providerQuery } from '@/api/query';
+import { Provider } from '@/assets/data/providerData';
 import ProviderCard from '@/components/ProviderCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+import { useSuspenseQuery } from '@tanstack/react-query';
 import { Search } from 'lucide-react';
 import React, { useState } from 'react';
 import { Link } from 'react-router';
@@ -9,8 +12,45 @@ import { Link } from 'react-router';
 const CollectionPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredProviders = educationalProviders.filter((provider) =>
-    provider.name.toLowerCase().includes(searchQuery.toLowerCase())
+  // const {
+  //   data: providerData,
+  //   isLoading,
+  //   isError,
+  //   error,
+  //   refetch,
+  // } = useQuery(providerQuery('?limits=8'));
+
+  const { data: providerData } = useSuspenseQuery(providerQuery('?limits=8'));
+
+  // if (isLoading) {
+  //   return (
+  //     <div className="flex justify-center items-center flex-col space-y-3">
+  //       loading
+  //     </div>
+  //   );
+  // }
+
+  // if (isError) {
+  //   return (
+  //     <div className="container mx-auto my-32 flex flex-1 place-content-center">
+  //       <div className="text-center text-red-400">
+  //         <p className="mb-4">{error.message}</p>
+  //         <Button
+  //           onClick={() => {
+  //             refetch();
+  //           }}
+  //           variant="secondary"
+  //         >
+  //           Retry
+  //         </Button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  const filteredProviders = providerData.providers.filter(
+    (provider: Provider) =>
+      provider.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -34,7 +74,7 @@ const CollectionPage = () => {
             </p>
           </div>
 
-          <div className="relative w-full md:w-96">
+          <div className="bg-white relative w-full md:w-96">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               size={20}
@@ -64,15 +104,16 @@ const CollectionPage = () => {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProviders.map((provider) => (
-              <Link
-                to={`/providers/${provider.id}/series`}
-                key={provider.id}
-                className="block"
-              >
-                <ProviderCard provider={provider} />
-              </Link>
-            ))}
+            {providerData &&
+              filteredProviders.map((provider: Provider) => (
+                <Link
+                  to={`/providers/${provider.id}/series`}
+                  key={provider.id}
+                  className="block"
+                >
+                  <ProviderCard provider={provider} />
+                </Link>
+              ))}
           </div>
         )}
       </main>
