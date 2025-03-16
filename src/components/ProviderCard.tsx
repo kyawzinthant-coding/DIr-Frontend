@@ -5,8 +5,8 @@ import { Provider } from '@/assets/data/providerData';
 
 const ProviderCard = ({ provider }: { provider: Provider }) => {
 
-  console.log(provider);
-  const imgURl = import.meta.env.VITE_IMG_URL;
+
+ const imgURl = import.meta.env.VITE_IMG_URL;
   return (
     <Card className="h-full overflow-hidden  transition-all duration-300 hover:shadow-xl border-0 shadow-md rounded-2xl hover:scale-105">
       <div className="bg-gradient-to-br from-blue-50 to-purple-50  p-8 flex items-center justify-center h-52">

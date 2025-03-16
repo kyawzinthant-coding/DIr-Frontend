@@ -3,8 +3,8 @@ import { Status } from './../../store/authStore';
 import api, { authApi } from '@/api';
 import useAuthStore from '@/store/authStore';
 
-import { redirect } from 'react-router';
-import { fetchMe, providerQuery } from '@/api/query';
+import { LoaderFunctionArgs, redirect } from 'react-router';
+import { fetchMe, providerQuery, ProviderSeriesQuery } from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 
 export const loginLoader = async () => {
@@ -62,4 +62,12 @@ export const collectionLoader = async () => {
 export const ProviderLoader = async () => {
   await queryClient.ensureQueryData(providerQuery('?limits=8'));
   return null;
+};
+
+export const SeriesLoader = async ({ params }: LoaderFunctionArgs) => {
+  if (!params.providerId) {
+    throw new Error('No Post ID provided');
+  }
+  await queryClient.ensureQueryData(ProviderSeriesQuery(params.providerId));
+  return { providerId: params.providerId };
 };

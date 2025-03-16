@@ -8,7 +8,15 @@ export const fetchMe = async () => {
 const fetchProviders = (q?: string) =>
   api.get(`user/providers/${q ?? ''}`).then((res) => res.data);
 
+const fetchProviderSeries = (id: string) =>
+  api.get(`user/providers/${id}/series`).then((res) => res.data);
+
 export const providerQuery = (q?: string) => ({
   queryKey: ['providers', q],
   queryFn: () => fetchProviders(q),
+});
+
+export const ProviderSeriesQuery = (id: string) => ({
+  queryKey: ['providerSeries', id],
+  queryFn: () => fetchProviderSeries(id),
 });

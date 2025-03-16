@@ -12,7 +12,12 @@ import {
   logoutAction,
   registerAction,
 } from './router/action';
-import { emailCheckLoader, loginLoader, ProviderLoader } from './router/loader';
+import {
+  emailCheckLoader,
+  loginLoader,
+  ProviderLoader,
+  SeriesLoader,
+} from './router/loader';
 import SignUpPage from '@/features/auth/SignUp';
 import AuthRootLayout from '@/features/auth/AuthRootLayout';
 import Register from './features/auth/Register';
@@ -48,6 +53,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ':providerId/series',
+            loader: SeriesLoader,
             element: <ProviderSeriesPage />,
           },
           {
