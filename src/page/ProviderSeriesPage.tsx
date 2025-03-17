@@ -6,7 +6,7 @@ import { ArrowLeft, Search } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ProviderSeries } from '@/assets/data/providerData';
+import { Provider, ProviderSeries } from '@/assets/data/providerData';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { ProviderSeriesQuery } from '@/api/query';
 
@@ -18,10 +18,11 @@ export default function ProviderSeriesPage() {
   );
 
   const series: ProviderSeries[] = seriesList.series;
-
-  console.log(series);
+  const provider: Provider = seriesList.provider;
 
   const [searchQuery, setSearchQuery] = useState('');
+
+  const imgURl = import.meta.env.VITE_IMG_URL;
 
   if (seriesList.series.length == 0) {
     return (
@@ -40,14 +41,12 @@ export default function ProviderSeriesPage() {
     series.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const imgURl = import.meta.env.VITE_IMG_URL;
-
   return (
     <div className="min-h-screen  mt-14">
       <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link
-            to="/providers"
+            to="/providerId/"
             className="inline-flex items-center text-white hover:text-orange-100 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
@@ -55,19 +54,20 @@ export default function ProviderSeriesPage() {
           </Link>
 
           <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-            <div className="w-32 h-32 relative flex-shrink-0 bg-white rounded-2xl p-4 shadow-md">
-              {/* <img
-                src={provider.logo.src}
-                alt={provider.logo.alt}
-                className="object-contain w-full h-full p-2"
-              /> */}
+            <div className="w-34 h-34 relative flex-shrink-0 bg-white rounded-2xl border-2 shadow-md">
+              <img
+                src={`${imgURl}${provider.image}`}
+                alt={provider.name}
+                loading="lazy"
+                className=" w-full h-full rounded-2xl "
+              />
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
-                {/* {provider.name}  */} ka na kay
+                {provider.name}
               </h1>
               <p className="text-xl text-orange-100 mt-3">
-                {/* {provider.series.length} Series Available */} kana lay
+                {series.length} Series Available
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export default function ProviderSeriesPage() {
               Available Series
             </h2>
             <p className="text-gray-600 mt-2 text-lg">
-              Browse series from kana
+              Browse series from {provider.name}
             </p>
           </div>
 
@@ -141,9 +141,9 @@ export default function ProviderSeriesPage() {
                         {series.name}
                       </h3>
                       <p className="text-orange-600 mt-3 font-medium">
-                        {series._count.series > 0
-                          ? `${series._count.series} Series Available`
-                          : 'No Series Available'}
+                        {series._count.courses > 0
+                          ? `${series._count.courses} Courses Available`
+                          : 'No Course Available'}
                       </p>
                       <div className="mt-6">
                         <Button className="w-full bg-orange-600 cursor-pointer hover:bg-orange-700rounded-xl px-6 py-3 h-auto text-base font-medium">

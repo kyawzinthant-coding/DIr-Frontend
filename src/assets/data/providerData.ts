@@ -15,6 +15,29 @@ export type Course = {
   coverImage: string;
 };
 
+export interface course {
+  id: number;
+  name: string;
+  previewImage: string;
+  description: string;
+  price: number;
+}
+
+export interface series {
+  id: number;
+  name: string;
+  description: string;
+  image: string;
+  category: {
+    id: string;
+    name: string;
+  };
+  _count: {
+    courses: number;
+  };
+}
+
+
 export type ProviderSeries = {
   id: number;
   name: string;
@@ -24,7 +47,7 @@ export type ProviderSeries = {
   description: string;
   image: string;
   _count: {
-    series: number;
+    courses: number;
   };
 };
 

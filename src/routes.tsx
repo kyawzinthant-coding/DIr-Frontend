@@ -13,6 +13,7 @@ import {
   registerAction,
 } from './router/action';
 import {
+  CoursesLoader,
   emailCheckLoader,
   loginLoader,
   ProviderLoader,
@@ -58,6 +59,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ':providerId/series/:seriesId',
+            loader: CoursesLoader,
             element: <SeriesCoursePage />,
           },
           {

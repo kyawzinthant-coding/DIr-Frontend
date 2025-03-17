@@ -4,7 +4,12 @@ import api, { authApi } from '@/api';
 import useAuthStore from '@/store/authStore';
 
 import { LoaderFunctionArgs, redirect } from 'react-router';
-import { fetchMe, providerQuery, ProviderSeriesQuery } from '@/api/query';
+import {
+  fetchMe,
+  providerQuery,
+  ProviderSeriesQuery,
+  SeriesCoursesQuery,
+} from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 
 export const loginLoader = async () => {
@@ -70,4 +75,17 @@ export const SeriesLoader = async ({ params }: LoaderFunctionArgs) => {
   }
   await queryClient.ensureQueryData(ProviderSeriesQuery(params.providerId));
   return { providerId: params.providerId };
+};
+
+export const CoursesLoader = async ({ params }: LoaderFunctionArgs) => {
+  if (!params.seriesId) {
+    throw new Error('No Series ID provided');
+  }
+
+  if (!params.providerId) {
+    throw new Error('No Series ID provided');
+  }
+
+  await queryClient.ensureQueryData(SeriesCoursesQuery(params.seriesId));
+  return { seriesId: params.seriesId, providerId: params.providerId };
 };

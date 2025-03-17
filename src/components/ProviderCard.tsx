@@ -10,13 +10,13 @@ const ProviderCard = ({ provider }: { provider: Provider }) => {
   return (
     <Card className="h-full overflow-hidden  transition-all duration-300 hover:shadow-xl border-0 shadow-md rounded-2xl hover:scale-105">
       <div className="bg-gradient-to-br from-blue-50 to-purple-50  p-8 flex items-center justify-center h-52">
-        <div className="w-40  relative flex items-center justify-center rounded-lg overflow-hidden">
+        <div className="w-[600px] h-[210px] relative flex items-center justify-center rounded-lg overflow-hidden">
           <img
             src={`${imgURl}${provider.image}`}
             alt={provider.name}
             loading="lazy"
             decoding="async"
-            className="object-contain w-full h-full transition-transform duration-300 hover:scale-110"
+            className="object-contain w-full h-full transition-transform duration-300 rounded-2xl hover:scale-110"
           />
         </div>
       </div>

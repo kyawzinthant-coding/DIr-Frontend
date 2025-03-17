@@ -1,40 +1,45 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { ArrowLeft, Search } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 
-import { educationalProviders } from '@/assets/data/providerData';
 import CourseCard from '@/components/CourseCard';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { SeriesCoursesQuery } from '@/api/query';
+import { course, series } from '@/assets/data/providerData';
 
 export default function SeriesCoursesPage() {
-  const { providerId, seriesId } = useParams();
+  const { seriesId, providerId } = useLoaderData();
 
-  const provider = educationalProviders.find(
-    (p) => p.id === Number.parseInt(providerId || '0')
-  );
-  const series = provider?.series.find(
-    (s) => s.id === Number.parseInt(seriesId || '0')
-  );
+  const { data: coursesData } = useSuspenseQuery(SeriesCoursesQuery(seriesId));
 
+  const courses: course[] = coursesData.courses;
+  const seriesData: series = coursesData.series;
+
+  console.log(coursesData);
   const [searchQuery, setSearchQuery] = useState('');
 
-  if (!provider || !series) {
-    return (
-      <div className="container mx-auto px-6 py-20 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Series not found</h2>
-        <Link to="/">
-          <Button className="mt-6 bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
-            Return to Providers
-          </Button>
-        </Link>
-      </div>
-    );
-  }
+  // if (coursesData) {
+  //   return (
+  //     <div className="container mx-auto px-6 py-20 text-center">
+  //       <h2 className="text-3xl font-bold text-gray-900">Series not found</h2>
+  //       <Link to="..">
+  //         <Button className="mt-6 cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
+  //           Return to Providers
+  //         </Button>
+  //       </Link>
+  //     </div>
+  //   );
+  // }
 
-  const filteredCourses = series.courses.filter((course) =>
+  const filteredCourses = courses.filter((course) =>
     course.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  console.log(filteredCourses);
+
+  const imgURl = import.meta.env.VITE_IMG_URL;
 
   return (
     <div className="min-h-screen  mt-16">
@@ -45,36 +50,32 @@ export default function SeriesCoursesPage() {
             className="inline-flex items-center text-white hover:text-blue-100 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
-            Back to {provider.name} Series
+            Back to {seriesData.name} Series
           </Link>
 
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="w-full md:w-64 h-80 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={
-                  typeof series.coverImage === 'string'
-                    ? series.coverImage
-                    : 'https://via.placeholder.com/256x320'
-                }
-                alt={series.name}
+                src={`${imgURl}${seriesData.image}`}
+                alt={seriesData.name}
                 className="w-full h-full object-cover"
               />
             </div>
             <div>
               <div className="inline-block px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-full mb-4">
-                {series.category}
+                {/* {series.category} */}
               </div>
               <h1 className="text-4xl font-bold tracking-tight">
-                {series.name}
+                {seriesData.name}
               </h1>
               <p className="text-xl text-blue-100 mt-3">
-                {series.courses.length} Courses Available
+                {seriesData._count.courses} Courses Available
               </p>
               <p className="text-white mt-6 max-w-2xl text-lg">
-                Explore our comprehensive collection of courses in the{' '}
-                {series.name} series. These courses are designed to help you
-                master {series.category} skills with expert guidance and
-                hands-on practice.
+                {/* Explore our comprehensive collection of courses in the{' '}
+                {seriesData.name} series. These courses are designed to help you
+                master {seriesData.category} skills with expert guidance and
+                hands-on practice. */}
               </p>
             </div>
           </div>
@@ -88,7 +89,7 @@ export default function SeriesCoursesPage() {
               Available Courses
             </h2>
             <p className="text-gray-600 mt-2 text-lg">
-              Browse courses in the {series.name} series
+              Browse courses in the {seriesData.name} series
             </p>
           </div>
 
@@ -128,7 +129,11 @@ export default function SeriesCoursesPage() {
                 key={course.id}
                 className="block"
               >
-                <CourseCard key={course.id} course={course} series={series} />
+                <CourseCard
+                  key={course.id}
+                  course={course}
+                  series={seriesData}
+                />
               </Link>
             ))}
           </div>
