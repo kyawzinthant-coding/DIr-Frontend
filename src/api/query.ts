@@ -18,6 +18,9 @@ export const providerQuery = (q?: string) => ({
   queryFn: () => fetchProviders(q),
 });
 
+const fetchCourseDetails = (id: string) =>
+  api.get(`user/courses/${id}`).then((res) => res.data);
+
 export const ProviderSeriesQuery = (id: string) => ({
   queryKey: ['providerSeries', id],
   queryFn: () => fetchProviderSeries(id),
@@ -26,4 +29,9 @@ export const ProviderSeriesQuery = (id: string) => ({
 export const SeriesCoursesQuery = (id: string) => ({
   queryKey: ['seriesCourses', id],
   queryFn: () => fetchCoursesWithSeries(id),
+});
+
+export const CourseDetailsQuery = (id: string) => ({
+  queryKey: ['courseDetails', id],
+  queryFn: () => fetchCourseDetails(id),
 });

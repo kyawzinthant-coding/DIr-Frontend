@@ -13,6 +13,7 @@ import {
   registerAction,
 } from './router/action';
 import {
+  courseDetailsLoader,
   CoursesLoader,
   emailCheckLoader,
   loginLoader,
@@ -83,6 +84,7 @@ export const router = createBrowserRouter([
           },
           {
             path: ':providerId/series/:seriesId/courses/:courseId',
+            loader: courseDetailsLoader,
             element: (
               <Suspense
                 fallback={<div className="text-center">Loading...</div>}

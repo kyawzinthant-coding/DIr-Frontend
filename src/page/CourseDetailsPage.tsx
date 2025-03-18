@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Link, useParams } from 'react-router';
+import { Link, useLoaderData, useParams } from 'react-router';
 import {
   ArrowLeft,
   Clock,
@@ -11,6 +11,8 @@ import {
   ShoppingCart,
   Check,
   Star,
+  CircleCheck,
+  ChevronDown,
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
@@ -21,35 +23,28 @@ import {
   TabsList,
   TabsTrigger,
 } from '../components/ui/tabs';
-import { educationalProviders } from '@/assets/data/providerData';
+import { CourseDetails } from '@/assets/data/providerData';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { CourseDetailsQuery } from '@/api/query';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function CourseDetailsPage() {
-  const { providerId, seriesId, courseId } = useParams();
+  const { providerId, seriesId } = useParams();
 
-  const provider = educationalProviders.find(
-    (p) => p.id === Number.parseInt(providerId || '0')
-  );
-  const series = provider?.series.find(
-    (s) => s.id === Number.parseInt(seriesId || '0')
-  );
-  const course = series?.courses.find(
-    (c) => c.id === Number.parseInt(courseId || '0')
-  );
+  const { courseId } = useLoaderData();
+
+  const { data } = useSuspenseQuery(CourseDetailsQuery(courseId));
+
+  const course: CourseDetails = data.course;
 
   const [isInCart, setIsInCart] = useState(false);
 
-  if (!provider || !series || !course) {
-    return (
-      <div className="container mx-auto px-6 py-20 text-center">
-        <h2 className="text-3xl font-bold text-gray-900">Course not found</h2>
-        <Link to="/providers">
-          <Button className="mt-6 bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
-            Return to Providers
-          </Button>
-        </Link>
-      </div>
-    );
-  }
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  // Toggle FAQ open/closed
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   const handleAddToCart = () => {
     setIsInCart(true);
@@ -59,6 +54,28 @@ export default function CourseDetailsPage() {
     // });
   };
 
+  const faqData = [
+    {
+      question: 'What is the duration of the course?',
+      answer:
+        'The course is self-paced, so you can complete it at your own convenience. On average, students take around 4-6 weeks to complete all modules and assignments.',
+    },
+    {
+      question: 'Do I get a certificate after completing the course?',
+      answer:
+        'Yes, you will receive a certificate upon successfully completing all modules and assessments. This certificate can be shared on your LinkedIn profile or included in your resume.',
+    },
+    {
+      question: 'Can I access the course materials after completion?',
+      answer:
+        'You will have lifetime access to all course materials, including updates. We regularly refresh the content to ensure it remains current with industry standards.',
+    },
+    {
+      question: 'Is there any support available if I get stuck?',
+      answer:
+        'Yes, we offer comprehensive support through our community forum where instructors and fellow students can help with your questions. For premium courses, you also get direct email support.',
+    },
+  ];
   return (
     <>
       <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white mt-16">
@@ -68,24 +85,20 @@ export default function CourseDetailsPage() {
             className="inline-flex items-center text-white hover:text-blue-100 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
-            Back to {series.name} Courses
+            Back to Courses
           </Link>
 
           <div className="flex flex-col lg:flex-row gap-8 items-start">
             <div className="w-full lg:w-80 h-80 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={
-                  typeof course.coverImage === 'string'
-                    ? course.coverImage
-                    : 'https://via.placeholder.com/320x320'
-                }
+                src={course.previewImage.url}
                 alt={course.name}
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex-1">
               <Badge className="bg-blue-700 hover:bg-blue-800 px-4 py-2 text-base rounded-full mb-4">
-                {series.category}
+                {/* {series.category} */}
               </Badge>
               <h1 className="text-4xl font-bold tracking-tight">
                 {course.name}
@@ -120,13 +133,12 @@ export default function CourseDetailsPage() {
 
                 <div className="flex items-center text-blue-100">
                   <Clock size={18} className="mr-2" />
-                  <span>{course.duration}</span>
+                  {/* <span>{course.duration}</span> */} 12
                 </div>
               </div>
 
               <p className="mt-6 text-blue-50 max-w-3xl text-lg">
-                {course.description ||
-                  `A comprehensive course designed to help you master ${series.category} skills with expert guidance and hands-on practice.`}
+                {course.description}
               </p>
 
               <div className="flex flex-wrap gap-4 mt-8">
@@ -148,7 +160,7 @@ export default function CourseDetailsPage() {
                   ) : (
                     <>
                       <ShoppingCart className="mr-2 h-6 w-6" />
-                      Add to Cart - ${course.price || '49.99'}
+                      Add to Cart
                     </>
                   )}
                 </Button>
@@ -190,10 +202,10 @@ export default function CourseDetailsPage() {
                   Instructor
                 </TabsTrigger>
                 <TabsTrigger
-                  value="reviews"
+                  value="FAQ"
                   className="rounded-lg py-3 px-6 text-base"
                 >
-                  Reviews
+                  FAQ
                 </TabsTrigger>
               </TabsList>
 
@@ -203,11 +215,8 @@ export default function CourseDetailsPage() {
                     Course Description
                   </h2>
                   <div className="prose max-w-none text-gray-600 text-lg space-y-4">
-                    <p>
-                      {course.fullDescription ||
-                        `Welcome to ${course.name}, a comprehensive course designed to help you master ${series.category} skills with expert guidance and hands-on practice.`}
-                    </p>
-                    <p>
+                    <p>{course.description}</p>
+                    {/* <p>
                       This course is part of the {series.name} series by{' '}
                       {provider.name}, a leading provider of educational
                       content. Whether you're a beginner or looking to advance
@@ -220,7 +229,7 @@ export default function CourseDetailsPage() {
                       exercises, quizzes, and real-world projects. By the end,
                       you'll have both theoretical knowledge and practical
                       experience that you can apply immediately.
-                    </p>
+                    </p> */}
                   </div>
                 </div>
 
@@ -253,74 +262,22 @@ export default function CourseDetailsPage() {
 
               <TabsContent value="curriculum">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Course Curriculum
+                  Course Requirements
                 </h2>
-                <div className="space-y-4">
-                  {/* {(
-                    course.modules || [
-                      {
-                        title: 'Introduction to the Course',
-                        lessons: 3,
-                        duration: '45 minutes',
-                      },
-                      {
-                        title: 'Core Concepts and Fundamentals',
-                        lessons: 5,
-                        duration: '1.5 hours',
-                      },
-                      {
-                        title: 'Practical Applications',
-                        lessons: 4,
-                        duration: '2 hours',
-                      },
-                      {
-                        title: 'Advanced Techniques',
-                        lessons: 6,
-                        duration: '2.5 hours',
-                      },
-                      {
-                        title: 'Real-world Projects',
-                        lessons: 3,
-                        duration: '3 hours',
-                      },
-                      {
-                        title: 'Final Assessment and Next Steps',
-                        lessons: 2,
-                        duration: '1 hour',
-                      },
-                    ]
-                  ).map((module, index) => (
+                <div className="space-y-2">
+                  {course.requirements.map((item, index) => (
                     <Card
                       key={index}
-                      className="border-0 shadow-md rounded-xl overflow-hidden"
+                      className="border border-gray-200 p-4  rounded-2xl transition-all duration-300 hover:shadow-xl"
                     >
-                      <CardContent className="p-0">
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between p-6">
-                          <div>
-                            <h3 className="text-xl font-bold text-gray-900">
-                              Module {index + 1}: {module.title}
-                            </h3>
-                            <div className="flex items-center mt-2 text-gray-600">
-                              <BookOpen size={16} className="mr-2" />
-                              <span className="font-medium">
-                                {module.lessons} lessons
-                              </span>
-                              <Clock size={16} className="ml-6 mr-2" />
-                              <span className="font-medium">
-                                {module.duration}
-                              </span>
-                            </div>
-                          </div>
-                          <Button
-                            variant="ghost"
-                            className="text-blue-600 mt-4 md:mt-0"
-                          >
-                            Preview
-                          </Button>
-                        </div>
-                      </CardContent>
+                      <div className="flex items-center gap-3">
+                        <CircleCheck className="text-green-500" size={20} />
+                        <span className="text-gray-800 font-medium">
+                          {item}
+                        </span>
+                      </div>
                     </Card>
-                  ))} */}
+                  ))}
                 </div>
               </TabsContent>
 
@@ -340,18 +297,9 @@ export default function CourseDetailsPage() {
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold text-gray-900">
-                          Dr. Sarah Johnson
+                          {/* Author {course.author[0]} */}
                         </h3>
-                        <p className="text-blue-600 text-lg font-medium">
-                          Senior Instructor at {provider.name}
-                        </p>
-                        <p className="mt-4 text-gray-600 text-lg">
-                          Dr. Johnson has over 15 years of experience in
-                          teaching and curriculum development. She specializes
-                          in {series.category} education and has helped
-                          thousands of students achieve their learning goals
-                          through her engaging and practical teaching approach.
-                        </p>
+
                         <div className="flex items-center mt-6 space-x-6">
                           <div className="flex items-center text-gray-700">
                             <Users size={20} className="mr-2 text-blue-600" />
@@ -370,71 +318,61 @@ export default function CourseDetailsPage() {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="reviews">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Student Reviews
-                </h2>
-                <div className="space-y-6">
-                  {[
-                    {
-                      name: 'Michael P.',
-                      rating: 5,
-                      comment:
-                        "This course exceeded my expectations. The content is well-structured and the instructor explains complex concepts in a way that's easy to understand.",
-                    },
-                    {
-                      name: 'Jennifer L.',
-                      rating: 4,
-                      comment:
-                        "Great course with practical examples. I've already started applying what I learned in my daily work.",
-                    },
-                    {
-                      name: 'Robert K.',
-                      rating: 5,
-                      comment:
-                        "One of the best courses I've taken. The instructor is knowledgeable and engaging, and the course materials are comprehensive.",
-                    },
-                  ].map((review, index) => (
-                    <Card
-                      key={index}
-                      className="border-0 shadow-md rounded-xl overflow-hidden"
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-center mb-4">
-                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold mr-3">
-                            {review.name.charAt(0)}
-                          </div>
-                          <div>
-                            <div className="font-bold text-gray-900">
-                              {review.name}
-                            </div>
-                            <div className="flex mt-1">
-                              {Array(5)
-                                .fill(0)
-                                .map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className={`w-4 h-4 ${
-                                      i < review.rating
-                                        ? 'text-yellow-400'
-                                        : 'text-gray-300'
-                                    }`}
-                                    fill="currentColor"
-                                  />
-                                ))}
-                            </div>
-                          </div>
-                          <div className="ml-auto text-gray-500 text-sm">
-                            2 weeks ago
-                          </div>
-                        </div>
-                        <p className="text-gray-600 text-lg">
-                          {review.comment}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+              <TabsContent value="FAQ">
+                <TabsContent value="FAQ">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                    Frequently Asked Questions
+                  </h2>
+                  <div className="space-y-4">
+                    {faqData.map((faq, index) => (
+                      <Card
+                        key={index}
+                        className={` bg-white overflow-hidden transition-all duration-200 ${
+                          openIndex === index
+                            ? 'border-primary/20  shadow-md bg-white'
+                            : 'border-gray-200 shadow-sm hover:border-primary/20'
+                        }`}
+                      >
+                        <CardContent className="p-0 bg-white">
+                          <button
+                            onClick={() => toggleFAQ(index)}
+                            className="flex justify-between  items-center w-full p-5 text-left focus:outline-none  focus:ring-primary/40 "
+                            aria-expanded={openIndex === index}
+                            aria-controls={`faq-answer-${index}`}
+                          >
+                            <h3 className="text-lg font-medium text-gray-900">
+                              {faq.question}
+                            </h3>
+                            <ChevronDown
+                              className={`h-5 w-5 text-primary transition-transform duration-300 ${
+                                openIndex === index ? 'rotate-180' : ''
+                              }`}
+                            />
+                          </button>
+
+                          <AnimatePresence>
+                            {openIndex === index && (
+                              <motion.div
+                                id={`faq-answer-${index}`}
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: 'auto', opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                className="overflow-hidden"
+                              >
+                                <div className="bg-white px-5 pb-5 pt-0  ">
+                                  <p className="text-gray-600 leading-relaxed">
+                                    {faq.answer}
+                                  </p>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
               </TabsContent>
             </Tabs>
           </div>
@@ -451,7 +389,7 @@ export default function CourseDetailsPage() {
                     <Clock className="mr-4 h-6 w-6 text-blue-600" />
                     <div>
                       <div className="font-medium text-lg">Duration</div>
-                      <div className="text-gray-500">{course.duration}</div>
+                      {/* <div className="text-gray-500">{course.duration}</div> */}
                     </div>
                   </div>
 
@@ -481,13 +419,6 @@ export default function CourseDetailsPage() {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
-                  <div className="flex justify-between mb-4">
-                    <span className="text-gray-600 text-lg">Price:</span>
-                    <span className="text-2xl font-bold text-gray-900">
-                      ${course.price || '49.99'}
-                    </span>
-                  </div>
-
                   <Button
                     className={`w-full rounded-xl px-6 py-5 h-auto text-base font-medium ${
                       isInCart
@@ -509,10 +440,6 @@ export default function CourseDetailsPage() {
                       </>
                     )}
                   </Button>
-
-                  <p className="text-center text-gray-500 mt-4">
-                    30-Day Money-Back Guarantee
-                  </p>
                 </div>
               </CardContent>
             </Card>

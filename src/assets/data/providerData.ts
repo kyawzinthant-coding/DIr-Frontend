@@ -15,6 +15,20 @@ export type Course = {
   coverImage: string;
 };
 
+export interface CourseDetails {
+  id: number;
+  name: string;
+  previewImage: {
+    url: string;
+  };
+  description: string;
+  price: number;
+  requirements: string[];
+  format: string;
+  author: string[];
+  CourseImages: string[];
+}
+
 export interface course {
   id: number;
   name: string;

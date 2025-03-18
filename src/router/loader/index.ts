@@ -5,6 +5,7 @@ import useAuthStore from '@/store/authStore';
 
 import { LoaderFunctionArgs, redirect } from 'react-router';
 import {
+  CourseDetailsQuery,
   fetchMe,
   providerQuery,
   ProviderSeriesQuery,
@@ -88,4 +89,12 @@ export const CoursesLoader = async ({ params }: LoaderFunctionArgs) => {
 
   await queryClient.ensureQueryData(SeriesCoursesQuery(params.seriesId));
   return { seriesId: params.seriesId, providerId: params.providerId };
+};
+
+export const courseDetailsLoader = async ({ params }: LoaderFunctionArgs) => {
+  if (!params.courseId) {
+    throw new Error('No Course ID provided');
+  }
+  await queryClient.ensureQueryData(CourseDetailsQuery(params.courseId));
+  return { courseId: params.courseId };
 };
