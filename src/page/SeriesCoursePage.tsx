@@ -17,21 +17,7 @@ export default function SeriesCoursesPage() {
   const courses: course[] = coursesData.courses;
   const seriesData: series = coursesData.series;
 
-  console.log(coursesData);
   const [searchQuery, setSearchQuery] = useState('');
-
-  // if (coursesData) {
-  //   return (
-  //     <div className="container mx-auto px-6 py-20 text-center">
-  //       <h2 className="text-3xl font-bold text-gray-900">Series not found</h2>
-  //       <Link to="..">
-  //         <Button className="mt-6 cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-xl px-6 py-5 h-auto text-base font-medium">
-  //           Return to Providers
-  //         </Button>
-  //       </Link>
-  //     </div>
-  //   );
-  // }
 
   const filteredCourses = courses.filter((course) =>
     course.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -39,14 +25,12 @@ export default function SeriesCoursesPage() {
 
   console.log(filteredCourses);
 
-  const imgURl = import.meta.env.VITE_IMG_URL;
-
   return (
     <div className="min-h-screen  mt-16">
       <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link
-            to="../"
+            to={`/providers/${providerId}/series`}
             className="inline-flex items-center text-white hover:text-blue-100 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
@@ -56,7 +40,7 @@ export default function SeriesCoursesPage() {
           <div className="flex flex-col md:flex-row gap-8 items-start">
             <div className="w-full md:w-64 h-80 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={`${imgURl}${seriesData.image}`}
+                src={`${seriesData.image.url}`}
                 alt={seriesData.name}
                 className="w-full h-full object-cover"
               />
@@ -72,10 +56,7 @@ export default function SeriesCoursesPage() {
                 {seriesData._count.courses} Courses Available
               </p>
               <p className="text-white mt-6 max-w-2xl text-lg">
-                {/* Explore our comprehensive collection of courses in the{' '}
-                {seriesData.name} series. These courses are designed to help you
-                master {seriesData.category} skills with expert guidance and
-                hands-on practice. */}
+                {seriesData.description}
               </p>
             </div>
           </div>
@@ -93,7 +74,7 @@ export default function SeriesCoursesPage() {
             </p>
           </div>
 
-          <div className="relative w-full md:w-96">
+          <div className="relative bg-white w-full md:w-96">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               size={20}

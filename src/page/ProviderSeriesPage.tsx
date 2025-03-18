@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import { ArrowLeft, Search } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
@@ -13,6 +13,7 @@ import { ProviderSeriesQuery } from '@/api/query';
 export default function ProviderSeriesPage() {
   const { providerId } = useLoaderData();
 
+  const navigate = useNavigate();
   const { data: seriesList } = useSuspenseQuery(
     ProviderSeriesQuery(providerId)
   );
@@ -21,8 +22,6 @@ export default function ProviderSeriesPage() {
   const provider: Provider = seriesList.provider;
 
   const [searchQuery, setSearchQuery] = useState('');
-
-  const imgURl = import.meta.env.VITE_IMG_URL;
 
   if (seriesList.series.length == 0) {
     return (
@@ -46,7 +45,7 @@ export default function ProviderSeriesPage() {
       <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link
-            to="/providerId/"
+            to="/providers"
             className="inline-flex items-center text-white hover:text-orange-100 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
@@ -56,7 +55,7 @@ export default function ProviderSeriesPage() {
           <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
             <div className="w-34 h-34 relative flex-shrink-0 bg-white rounded-2xl border-2 shadow-md">
               <img
-                src={`${imgURl}${provider.image}`}
+                src={`${provider.image.url}`}
                 alt={provider.name}
                 loading="lazy"
                 className=" w-full h-full rounded-2xl "
@@ -66,6 +65,7 @@ export default function ProviderSeriesPage() {
               <h1 className="text-4xl font-bold tracking-tight">
                 {provider.name}
               </h1>
+
               <p className="text-xl text-orange-100 mt-3">
                 {series.length} Series Available
               </p>
@@ -117,15 +117,11 @@ export default function ProviderSeriesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {series &&
               filteredSeries.map((series) => (
-                <Link
-                  to={`/providers/${providerId}/series/${series.id}`}
-                  key={series.id}
-                  className="block"
-                >
+                <div key={series.id} className="block">
                   <Card className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg border-0 shadow-md rounded-2xl">
                     <div className="w-full h-56 relative">
                       <img
-                        src={`${imgURl}${series.image}`}
+                        src={`${series.image.url}`}
                         alt={series.name}
                         className="w-full h-full object-cover"
                       />
@@ -141,18 +137,35 @@ export default function ProviderSeriesPage() {
                         {series.name}
                       </h3>
                       <p className="text-orange-600 mt-3 font-medium">
-                        {series._count.courses > 0
-                          ? `${series._count.courses} Courses Available`
-                          : 'No Course Available'}
+                        {series._count.courses > 0 ? (
+                          `${series._count.courses} Courses Available`
+                        ) : (
+                          <span className="text-sm text-green-400">
+                            Coming Soon
+                          </span>
+                        )}
                       </p>
                       <div className="mt-6">
-                        <Button className="w-full bg-orange-600 cursor-pointer hover:bg-orange-700rounded-xl px-6 py-3 h-auto text-base font-medium">
-                          View Courses
-                        </Button>
+                        {series._count.courses > 0 ? (
+                          <Button
+                            onClick={() =>
+                              navigate(
+                                `/providers/${providerId}/series/${series.id}`
+                              )
+                            }
+                            className="w-full bg-orange-600 cursor-pointer hover:bg-orange-700rounded-xl px-6 py-3 h-auto text-base font-medium"
+                          >
+                            View Courses
+                          </Button>
+                        ) : (
+                          <Button className="w-full  cursor-not-allowed hover:bg-orange-700rounded-xl px-6 py-3 h-auto text-base font-medium">
+                            Coming Soon
+                          </Button>
+                        )}
                       </div>
                     </CardContent>
                   </Card>
-                </Link>
+                </div>
               ))}
           </div>
         )}

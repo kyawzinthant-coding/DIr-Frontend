@@ -6,13 +6,13 @@ import { Provider } from '@/assets/data/providerData';
 const ProviderCard = ({ provider }: { provider: Provider }) => {
 
 
- const imgURl = import.meta.env.VITE_IMG_URL;
+
   return (
     <Card className="h-full overflow-hidden  transition-all duration-300 hover:shadow-xl border-0 shadow-md rounded-2xl hover:scale-105">
       <div className="bg-gradient-to-br from-blue-50 to-purple-50  p-8 flex items-center justify-center h-52">
         <div className="w-[600px] h-[210px] relative flex items-center justify-center rounded-lg overflow-hidden">
           <img
-            src={`${imgURl}${provider.image}`}
+            src={`${provider.image.url}`}
             alt={provider.name}
             loading="lazy"
             decoding="async"

@@ -28,6 +28,7 @@ import ProviderLayout from './features/course/ProviderLayout';
 import ProviderSeriesPage from './page/ProviderSeriesPage';
 import SeriesCoursePage from './page/SeriesCoursePage';
 import CourseDetailsPage from './page/CourseDetailsPage';
+import { Suspense } from 'react';
 
 export const router = createBrowserRouter([
   {
@@ -50,21 +51,45 @@ export const router = createBrowserRouter([
           {
             index: true,
             loader: ProviderLoader,
-            element: <CollectionPage />,
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <CollectionPage />
+              </Suspense>
+            ),
           },
           {
             path: ':providerId/series',
             loader: SeriesLoader,
-            element: <ProviderSeriesPage />,
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <ProviderSeriesPage />
+              </Suspense>
+            ),
           },
           {
             path: ':providerId/series/:seriesId',
             loader: CoursesLoader,
-            element: <SeriesCoursePage />,
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <SeriesCoursePage />
+              </Suspense>
+            ),
           },
           {
             path: ':providerId/series/:seriesId/courses/:courseId',
-            element: <CourseDetailsPage />,
+            element: (
+              <Suspense
+                fallback={<div className="text-center">Loading...</div>}
+              >
+                <CourseDetailsPage />
+              </Suspense>
+            ),
           },
         ],
       },
