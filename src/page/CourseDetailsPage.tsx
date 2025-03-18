@@ -104,39 +104,6 @@ export default function CourseDetailsPage() {
                 {course.name}
               </h1>
 
-              <div className="flex items-center mt-4 space-x-4">
-                <div className="flex items-center">
-                  <Star
-                    className="w-5 h-5 text-yellow-400 mr-1"
-                    fill="currentColor"
-                  />
-                  <Star
-                    className="w-5 h-5 text-yellow-400 mr-1"
-                    fill="currentColor"
-                  />
-                  <Star
-                    className="w-5 h-5 text-yellow-400 mr-1"
-                    fill="currentColor"
-                  />
-                  <Star
-                    className="w-5 h-5 text-yellow-400 mr-1"
-                    fill="currentColor"
-                  />
-                  <Star
-                    className="w-5 h-5 text-yellow-400/50 mr-1"
-                    fill="currentColor"
-                  />
-                  <span className="ml-2 text-white font-medium">
-                    4.8 (240 reviews)
-                  </span>
-                </div>
-
-                <div className="flex items-center text-blue-100">
-                  <Clock size={18} className="mr-2" />
-                  {/* <span>{course.duration}</span> */} 12
-                </div>
-              </div>
-
               <p className="mt-6 text-blue-50 max-w-3xl text-lg">
                 {course.description}
               </p>
@@ -190,10 +157,10 @@ export default function CourseDetailsPage() {
                   Overview
                 </TabsTrigger>
                 <TabsTrigger
-                  value="curriculum"
+                  value="Requirements"
                   className="rounded-lg py-3 px-6 text-base"
                 >
-                  Curriculum
+                  Requirements
                 </TabsTrigger>
                 <TabsTrigger
                   value="instructor"
@@ -260,7 +227,7 @@ export default function CourseDetailsPage() {
                 </div>
               </TabsContent>
 
-              <TabsContent value="curriculum">
+              <TabsContent value="Requirements">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
                   Course Requirements
                 </h2>
@@ -336,7 +303,7 @@ export default function CourseDetailsPage() {
                         <CardContent className="p-0 bg-white">
                           <button
                             onClick={() => toggleFAQ(index)}
-                            className="flex justify-between  items-center w-full p-5 text-left focus:outline-none  focus:ring-primary/40 "
+                            className="flex justify-between  items-center w-full px-4 text-left focus:outline-none  focus:ring-primary/40 "
                             aria-expanded={openIndex === index}
                             aria-controls={`faq-answer-${index}`}
                           >
@@ -360,7 +327,7 @@ export default function CourseDetailsPage() {
                                 transition={{ duration: 0.3 }}
                                 className="overflow-hidden"
                               >
-                                <div className="bg-white px-5 pb-5 pt-0  ">
+                                <div className="bg-white px-5 mt-6 pb-5 pt-0  ">
                                   <p className="text-gray-600 leading-relaxed">
                                     {faq.answer}
                                   </p>
