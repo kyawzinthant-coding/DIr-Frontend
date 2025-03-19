@@ -5,12 +5,18 @@ import hero from '../assets/insiderImages/hero.png';
 
 function HeroSection() {
   return (
-    <section className="w-full lg:px-2 py-0 md:py-7 lg:py-4 xl:py-6">
+    <section
+      className="w-full lg:px-2 py-0 md:py-7 lg:py-4 xl:py-6"
+      aria-labelledby="hero-heading"
+    >
       <div className="container px-0 md:px-4">
         <div className="grid gap-8 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <div className="flex flex-col justify-center space-y-6">
             <div className="space-y-4">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+              <h1
+                id="hero-heading"
+                className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none"
+              >
                 Inspire Young Minds with Engaging Learning!
               </h1>
               <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed">
@@ -20,30 +26,27 @@ function HeroSection() {
               </p>
             </div>
             <div className="flex flex-col gap-3 min-[400px]:flex-row">
-              <Link to="/collection">
-                <Button size="lg" className="gap-1">
+              <Link to="/providers" aria-label="Explore Courses">
+                {' '}
+                <Button size="lg" className="gap-1 cursor-pointer">
                   Explore Courses
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />{' '}
                 </Button>
               </Link>
-              <Link to="/signup">
-                <Button size="lg" variant="outline">
+              <Link to="/login" aria-label="Get Started for Free">
+                <Button size="lg" variant="outline" className="cursor-pointer">
                   Get Started for Free
                 </Button>
               </Link>
-            </div>
-            <div className="flex items-center space-x-4 text-sm mt-2">
-              <div className="text-muted-foreground leading-relaxed">
-                Trusted by parents and teachers worldwide. Find the perfect
-                learning resources for your child!
-              </div>
             </div>
           </div>
           <div className="hidden lg:block">
             <img
               src={hero}
-              alt="Hero Image"
+              decoding="async"
+              alt="Children engaging in interactive learning activities"
               className="w-full h-full object-cover rounded-lg"
+              loading="lazy"
             />
           </div>
         </div>

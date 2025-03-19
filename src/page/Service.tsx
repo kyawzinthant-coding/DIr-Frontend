@@ -23,13 +23,19 @@ export default function OurServices() {
   ];
 
   return (
-    <section className="w-full py-12 ">
+    <section className="w-full py-12" aria-labelledby="our-services-heading">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center text-center mb-10">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2
+            id="our-services-heading"
+            className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+          >
             Our Services
           </h2>
-          <div className="w-20 h-1 bg-orange-500 mt-4 mb-6 rounded-full"></div>
+          <div
+            className="w-20 h-1 bg-orange-500 mt-4 mb-6 rounded-full"
+            aria-hidden="true"
+          ></div>
           <p className="max-w-2xl text-lg text-gray-600">
             We're committed to providing the best educational experience with
             features designed to help you succeed.
@@ -41,11 +47,19 @@ export default function OurServices() {
             <div
               key={index}
               className="flex flex-col items-center p-6 text-center bg-orange-50 rounded-xl transition-all duration-300 hover:shadow-lg hover:translate-y-[-5px]"
+              role="article"
+              aria-labelledby={`service-${index}-title`}
             >
               <div className="p-3 mb-4 bg-orange-100 rounded-full">
-                <service.icon className="w-8 h-8 text-orange-500" />
+                <service.icon
+                  className="w-8 h-8 text-orange-500"
+                  aria-hidden="true"
+                />{' '}
               </div>
-              <h3 className="mb-3 text-xl font-semibold text-gray-900">
+              <h3
+                id={`service-${index}-title`}
+                className="mb-3 text-xl font-semibold text-gray-900"
+              >
                 {service.title}
               </h3>
               <p className="text-gray-600">{service.description}</p>
@@ -55,7 +69,7 @@ export default function OurServices() {
 
         <div className="mt-12 text-center hidden">
           <div className="inline-flex items-center p-1 px-2 bg-orange-100 rounded-full text-sm text-orange-700">
-            <span className="px-2 py-1 bg-orange-500 text-white rounded-full mr-2 ">
+            <span className="px-2 py-1 bg-orange-500 text-white rounded-full mr-2">
               New
             </span>
             Now offering specialized certification programs for professionals

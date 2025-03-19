@@ -15,21 +15,37 @@ function AboutUs() {
   }, [isInView, hasAnimated]);
 
   return (
-    <section ref={ref} className="py-16 bg-gray-50">
+    <section
+      ref={ref}
+      className="py-16 bg-gray-50"
+      aria-labelledby="about-us-heading"
+    >
       <div className="flex flex-col items-center text-center mb-10">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2
+          id="about-us-heading"
+          className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+        >
           About Us
         </h2>
-        <div className="w-20 h-1 bg-orange-500 mt-4 mb-6 rounded-full"></div>
+        <div
+          className="w-20 h-1 bg-orange-500 mt-4 mb-6 rounded-full"
+          aria-hidden="true"
+        ></div>
       </div>
+
       <div className="container mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center gap-12">
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={hasAnimated ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="lg:w-1/2"
+          role="article"
+          aria-labelledby="about-dir-heading"
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2
+            id="about-dir-heading"
+            className="text-4xl font-bold text-gray-900 mb-6"
+          >
             About Digital Information Resources (DIR)
           </h2>
           <p className="text-lg text-gray-700 leading-relaxed">
@@ -55,6 +71,7 @@ function AboutUs() {
             limitless learning opportunities!
           </p>
         </motion.div>
+
         <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={hasAnimated ? { opacity: 1, x: 0 } : {}}
@@ -63,8 +80,10 @@ function AboutUs() {
         >
           <img
             src={dirLogo}
-            alt="DIR Logo"
+            alt="Digital Information Resources (DIR) team working on educational content"
             className="w-96 h-auto object-contain"
+            decoding="async"
+            loading="lazy"
           />
         </motion.div>
       </div>
