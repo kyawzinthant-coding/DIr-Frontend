@@ -49,7 +49,7 @@ export default function OurServices() {
         {/* Section Header */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <span className="inline-block rounded-lg  px-3 py-1 text-md text-gray-800">
+            <span className="inline-block rounded-lg  px-3 py-1 bg-[#F2F5F9] text-md text-gray-800">
               Our Services
             </span>
             <h2

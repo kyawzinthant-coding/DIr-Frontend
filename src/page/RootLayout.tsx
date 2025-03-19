@@ -29,7 +29,7 @@ function RootLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white/80 flex flex-col">
       <Navbar />
 
       <ProgressBar />

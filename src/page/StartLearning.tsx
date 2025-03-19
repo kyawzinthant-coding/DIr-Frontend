@@ -15,7 +15,7 @@ import { Link } from 'react-router';
 const StartLearning = () => {
   const { data: providerData } = useSuspenseQuery(providerQuery('?limits=4'));
   return (
-    <section className="w-full py-12 md:py-24 lg:py-16 ">
+    <section className="w-full py-12 md:py-24 lg:py-14 ">
       <div className="container px-4 md:px-12">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center space-y-4">
@@ -32,9 +32,11 @@ const StartLearning = () => {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Button size="lg" className="gap-1.5 cursor-pointer">
-                View All Providers <ChevronRight className="h-4 w-4" />
-              </Button>
+              <Link to="/providers">
+                <Button size="lg" className="gap-1.5 cursor-pointer">
+                  View All Providers <ChevronRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2">

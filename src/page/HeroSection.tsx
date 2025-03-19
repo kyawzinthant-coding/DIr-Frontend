@@ -10,8 +10,8 @@ function HeroSection() {
       className="w-full bg-lines py-12 md:py-6 lg:py-6 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="hero-heading"
     >
-      <div className="container px-4 md:px-12">
-        <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 xl:grid-cols-[1fr_550px]">
+      <div className="container px-4 md:px-18">
+        <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 h-[35vh] items-center xl:grid-cols-[1fr_550px]">
           {/* Left Section */}
           <div className="flex flex-col justify-center space-y-6">
             <div className="space-y-4">
@@ -64,7 +64,7 @@ function HeroSection() {
               alt="Children engaging in interactive learning activities with digital tools"
               className="w-full h-full object-cover rounded-lg"
               loading="lazy"
-              width={600}
+              width={800}
               height={360}
             />
           </div>

@@ -1,6 +1,5 @@
 import { Link, NavLink } from 'react-router';
 import logo from '../../assets/dirlogoC.svg';
-import searchIcon from '../../assets/search_icon.png';
 import cartIcon from '../../assets/cart_icon.png';
 import AuthDropDown from './AuthDropDown';
 
@@ -41,13 +40,11 @@ const Navbar: React.FC = () => {
         </ul>
 
         <div className="flex items-center gap-6">
-          <img src={searchIcon} className="w-5 cursor-pointer" alt="Search" />
-
           <Link to="/cart" className="relative">
             <img src={cartIcon} className="w-5 min-w-5" alt="Cart" />
-            <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-blue-800 text-white aspect-square rounded-full text-[8px]">
+            {/* <p className="absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-blue-800 text-white aspect-square rounded-full text-[8px]">
               10
-            </p>
+            </p> */}
           </Link>
           <AuthDropDown user={user} />
         </div>
