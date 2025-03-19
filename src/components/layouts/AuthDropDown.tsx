@@ -22,7 +22,7 @@ interface UserProps {
 function AuthDropDown({ user }: UserProps) {
   if (!user) {
     return (
-      <Button className="cursor-pointer" size="sm" asChild>
+      <Button className="cursor-pointer hidden md:block" size="sm" asChild>
         <Link to="/login">
           Sign In
           <span className="sr-only">Sign In</span>
@@ -44,7 +44,7 @@ function AuthDropDown({ user }: UserProps) {
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
+      <DropdownMenuContent className="w-56 " align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.username}</p>

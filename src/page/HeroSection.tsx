@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 function HeroSection() {
   return (
     <section
-      className="w-full bg-lines py-12 md:py-6 lg:py-6 bg-gradient-to-b from-background to-muted/30"
+      className="w-full bg-lines py-6 md:py-6 lg:py-6 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="hero-heading"
     >
       <div className="container px-4 md:px-18">

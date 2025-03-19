@@ -15,7 +15,7 @@ import { Link } from 'react-router';
 const StartLearning = () => {
   const { data: providerData } = useSuspenseQuery(providerQuery('?limits=4'));
   return (
-    <section className="w-full py-12 md:py-24 lg:py-12 ">
+    <section className="w-full py-6 md:py-24 lg:py-12 ">
       <div className="container px-4 md:px-12">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center space-y-4">
