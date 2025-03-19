@@ -39,6 +39,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        loader: ProviderLoader,
         element: <Home />,
       },
       {

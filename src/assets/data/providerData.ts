@@ -88,6 +88,7 @@ export type Provider2 = {
 export interface Provider {
   id: number;
   name: string;
+  description: string;
   image: {
     url: string;
   };

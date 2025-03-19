@@ -12,41 +12,7 @@ import { Link } from 'react-router';
 const CollectionPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // const {
-  //   data: providerData,
-  //   isLoading,
-  //   isError,
-  //   error,
-  //   refetch,
-  // } = useQuery(providerQuery('?limits=8'));
-
   const { data: providerData } = useSuspenseQuery(providerQuery('?limits=8'));
-
-  // if (isLoading) {
-  //   return (
-  //     <div className="flex justify-center items-center flex-col space-y-3">
-  //       loading
-  //     </div>
-  //   );
-  // }
-
-  // if (isError) {
-  //   return (
-  //     <div className="container mx-auto my-32 flex flex-1 place-content-center">
-  //       <div className="text-center text-red-400">
-  //         <p className="mb-4">{error.message}</p>
-  //         <Button
-  //           onClick={() => {
-  //             refetch();
-  //           }}
-  //           variant="secondary"
-  //         >
-  //           Retry
-  //         </Button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   const filteredProviders = providerData.providers.filter(
     (provider: Provider) =>

@@ -29,10 +29,9 @@ function RootLayout() {
   }, [pathname]);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div>
-        <Navbar />
-      </div>
+    <div className="min-h-screen bg-white flex flex-col">
+      <Navbar />
+
       <ProgressBar />
       <main className="flex-1">
         <Outlet />

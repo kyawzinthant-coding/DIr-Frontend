@@ -10,9 +10,11 @@ const Navbar: React.FC = () => {
   const { user } = useAuthDataStore();
 
   return (
-    <header className="fixed -top-0 z-50 w-full border-b mb-12 bg-background">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="max-w-7xl mx-auto flex items-center justify-between  font-medium">
-        <img src={logo} alt="Logo" className="w-28" />
+        <Link to="/">
+          <img src={logo} alt="Logo" className="w-28" />
+        </Link>
 
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
           {['/', '/providers', '/about', '/contact'].map((path, index) => {
