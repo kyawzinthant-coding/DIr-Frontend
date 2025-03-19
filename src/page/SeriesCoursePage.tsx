@@ -26,7 +26,7 @@ export default function SeriesCoursesPage() {
   console.log(filteredCourses);
 
   return (
-    <div className="min-h-screen  mt-16">
+    <div className="min-h-screen">
       <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link

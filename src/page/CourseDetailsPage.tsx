@@ -10,7 +10,6 @@ import {
   Award,
   ShoppingCart,
   Check,
-  Star,
   CircleCheck,
   ChevronDown,
 } from 'lucide-react';
@@ -78,7 +77,7 @@ export default function CourseDetailsPage() {
   ];
   return (
     <>
-      <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white mt-16">
+      <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link
             to={`/providers/${providerId}/series/${seriesId}`}

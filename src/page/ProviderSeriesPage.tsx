@@ -41,7 +41,7 @@ export default function ProviderSeriesPage() {
   );
 
   return (
-    <div className="min-h-screen  mt-14">
+    <div className="min-h-screen  ">
       <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
         <div className="container mx-auto px-6 py-12">
           <Link

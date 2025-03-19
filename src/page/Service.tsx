@@ -42,7 +42,7 @@ export default function OurServices() {
 
   return (
     <section
-      className="w-full py-16 md:py-24 lg:py-32 "
+      className="w-full py-16 md:py-24 lg:py-28 "
       aria-labelledby="our-services-heading"
     >
       <div className="container px-4 md:px-12">

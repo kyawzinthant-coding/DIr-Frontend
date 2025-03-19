@@ -22,14 +22,14 @@ const CollectionPage = () => {
   return (
     <div className="min-h-screen ">
       <header className="bg-gradient-to-r text-white">
-        <div className="container mx-auto px-6 py-6">
+        <div className="container mx-auto px-6">
           <h1 className="text-4xl font-bold tracking-tight">
             E-Learning Platform
           </h1>
         </div>
       </header>
 
-      <main className="container mx-auto px-6 my-12">
+      <main className="container mx-auto px-6 ">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
           <div>
             <h2 className="text-3xl font-bold text-gray-900">
