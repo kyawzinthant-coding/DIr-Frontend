@@ -10,12 +10,12 @@ import {
 } from '@/components/ui/card';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { ChevronRight, Play } from 'lucide-react';
+import { Link } from 'react-router';
 
 const StartLearning = () => {
   const { data: providerData } = useSuspenseQuery(providerQuery('?limits=4'));
-  console.log(providerData);
   return (
-    <section className="w-full py-12 md:py-24 lg:py-16 bg-muted/30">
+    <section className="w-full py-12 md:py-24 lg:py-16 ">
       <div className="container px-4 md:px-12">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center space-y-4">
@@ -55,13 +55,15 @@ const StartLearning = () => {
                       {course._count.series} Series
                     </Badge>
                   </div>
-                  <Button
-                    size="icon"
-                    variant="secondary"
-                    className="absolute right-4 cursor-pointer top-4 h-8 w-8 rounded-full"
-                  >
-                    <Play className="h-4 w-4" />
-                  </Button>
+                  <Link to={`/providers/${course.id}/series`}>
+                    <Button
+                      size="icon"
+                      variant="secondary"
+                      className="absolute right-4 cursor-pointer top-4 h-8 w-8 rounded-full"
+                    >
+                      <Play className="h-4 w-4" />
+                    </Button>
+                  </Link>
                 </div>
                 <CardHeader className="p-4">
                   <CardTitle className="line-clamp-1">{course.name}</CardTitle>

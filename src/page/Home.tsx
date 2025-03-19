@@ -4,6 +4,7 @@ import HeroSection from './HeroSection';
 import Service from './Service';
 import StartLearning from './StartLearning';
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router';
 
 function Home() {
   return (
@@ -28,12 +29,17 @@ function Home() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Button size="lg" className="gap-1.5">
-                Get Started for Free <ChevronRight className="h-4 w-4" />
-              </Button>
-              <Button size="lg" variant="outline">
-                Explore Courses
-              </Button>
+              <Link to="/login">
+                <Button size="lg" className="gap-1.5 cursor-pointer">
+                  Get Started for Free <ChevronRight className="h-4 w-4" />
+                </Button>
+              </Link>
+
+              <Link to="/providers">
+                <Button size="lg" className="cursor-pointer" variant="outline">
+                  Explore Courses
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

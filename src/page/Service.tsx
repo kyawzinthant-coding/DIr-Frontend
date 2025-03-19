@@ -46,25 +46,25 @@ export default function OurServices() {
       aria-labelledby="our-services-heading"
     >
       <div className="container px-4 md:px-12">
+        {/* Section Header */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block rounded-lg bg-[#F2F5F9] px-3 py-1 text-md">
+            <span className="inline-block rounded-lg  px-3 py-1 text-md text-gray-800">
               Our Services
-            </div>
+            </span>
             <h2
               id="our-services-heading"
-              className="text-4xl font-bold tracking-tighter text-gray-900 sm:text-5xl"
+              className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
             >
               Designed for Young Learners
             </h2>
-            <p className="max-w-[900px] text-lg text-gray-600 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+            <p className="max-w-[900px] text-lg text-gray-600 md:text-xl/relaxed">
               We're committed to providing the best educational experience with
               features designed to help you succeed.
             </p>
           </div>
         </div>
 
-        {/* Services Grid */}
         <div
           className="mx-auto grid max-w-8xl grid-cols-1 gap-8 py-16 md:grid-cols-2 lg:grid-cols-3"
           role="list"
@@ -72,23 +72,23 @@ export default function OurServices() {
           {services.map((service) => (
             <Card
               key={service.id}
-              className="relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2"
+              className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-2 rounded-lg"
               role="listitem"
               aria-labelledby={`service-${service.id}-title`}
             >
               <div
-                className="absolute right-4 top-4 h-10 w-10 rounded-full bg-[#2563EB]/10 flex items-center justify-center"
+                className="absolute right-4 top-4 h-12 w-12 rounded-full bg-[#2563EB]/10 flex items-center justify-center"
                 aria-hidden="true"
               >
                 <service.icon
-                  className="h-5 w-5 text-[#2563EB]"
+                  className="h-6 w-6 text-[#2563EB]"
                   aria-hidden="true"
                 />
               </div>
               <CardHeader>
                 <CardTitle
                   id={`service-${service.id}-title`}
-                  className="text-2xl font-bold text-gray-900"
+                  className="text-2xl font-semibold text-gray-900"
                 >
                   {service.title}
                 </CardTitle>
@@ -97,14 +97,14 @@ export default function OurServices() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-base text-gray-600 leading-relaxed">
+                <p className="text-base text-gray-700 leading-relaxed">
                   {service.content}
                 </p>
               </CardContent>
               <CardFooter>
                 <Button
                   variant="ghost"
-                  className="gap-1 p-0 text-[#2563EB] hover:text-[#1D4ED8] cursor-pointer"
+                  className="gap-1 p-0 text-[#2563EB] hover:text-[#1D4ED8] cursor-pointer transition-all"
                   aria-label={service.ariaLabel}
                 >
                   Learn more{' '}
