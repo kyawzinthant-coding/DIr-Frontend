@@ -14,9 +14,13 @@ import { Separator } from '@/components/ui/separator';
 
 import { Icons } from '@/components/icons';
 import { ScrollArea } from '../ui/scroll-area';
+import useCartStore from '@/store/cartStore';
+import { Card, CardContent } from '../ui/card';
 
 export default function CartSheet() {
-  const itemCount = 4;
+  const { items } = useCartStore.getState();
+  const { removeItem } = useCartStore();
+  const itemCount = items.length;
 
   return (
     <Sheet>
@@ -41,10 +45,41 @@ export default function CartSheet() {
           <SheetTitle>Cart - {itemCount}</SheetTitle>
         </SheetHeader>
         <Separator className="" />
-        {[1].length > 0 ? (
+        {items.length > 0 ? (
           <>
-            <ScrollArea className="my-2 h-[68vh] pb-8 p-6">
-              <div className="flex-1">sd</div>
+            <ScrollArea className="my-2 h-[74vh] pb-8 p-6">
+              {items.map((item) => (
+                <Card
+                  key={item.id}
+                  className="p-4 mb-4 h-full rounded-xl flex "
+                >
+                  <CardContent className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2 ">
+                      <img
+                        src={item.previewImage.url}
+                        alt={item.name}
+                        className="size-18 rounded"
+                      />
+                      <div className="ml-4">
+                        <div className="font-medium">{item.name}</div>
+                      </div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="cursor-pointer bg-red-100 "
+                      aria-label="Remove from cart"
+                      onClick={() => removeItem(item.id)}
+                    >
+                      <Icons.trash
+                        className="size-4 text-red-400 "
+                        aria-hidden="true"
+                      />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
             </ScrollArea>
 
             <div className="space-y-4 absolute bottom-0 w-full  p-6">
@@ -52,7 +87,9 @@ export default function CartSheet() {
               <div className="space-y-1.5 text-sm">
                 <div className="flex justify-between">
                   <span>Total</span>
-                  <span>$12</span>
+                  <span>
+                    {items.reduce((total, item) => total + item.price, 0)}
+                  </span>
                 </div>
               </div>
               <SheetFooter>

@@ -22,6 +22,7 @@ import { CourseDetails } from '@/assets/data/providerData';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { CourseDetailsQuery } from '@/api/query';
 import { AnimatePresence, motion } from 'framer-motion';
+import useCartStore from '@/store/cartStore';
 
 export default function CourseDetailsPage() {
   const { providerId, seriesId } = useParams();
@@ -36,18 +37,16 @@ export default function CourseDetailsPage() {
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  // Toggle FAQ open/closed
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   const handleAddToCart = () => {
     setIsInCart(true);
-    // toast({
-    //   title: 'Added to cart',
-    //   description: `${course.name} has been added to your cart.`,
-    // });
   };
+
+  const { addItem } = useCartStore();
+  const { items } = useCartStore.getState();
 
   const faqData = [
     {
@@ -71,6 +70,7 @@ export default function CourseDetailsPage() {
         'Yes, we offer comprehensive support through our community forum where instructors and fellow students can help with your questions. For premium courses, you also get direct email support.',
     },
   ];
+
   return (
     <>
       <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
@@ -102,16 +102,16 @@ export default function CourseDetailsPage() {
 
               <div className="flex flex-wrap gap-4 mt-8">
                 <Button
+                  onClick={() => addItem(course)}
                   size="lg"
                   className={`rounded-xl px-8 py-6 md:w-[200px] cursor-pointer h-auto text-lg font-medium ${
-                    isInCart
+                    items.some((i) => i.id === course.id)
                       ? 'bg-green-600 hover:bg-green-700'
                       : 'bg-orange-500 hover:bg-orange-600'
                   }`}
-                  onClick={handleAddToCart}
-                  disabled={isInCart}
+                  disabled={items.some((i) => i.id === course.id)}
                 >
-                  {isInCart ? (
+                  {items.some((i) => i.id === course.id) ? (
                     <>
                       <Check className="mr-2 h-6 w-6" />
                       Added to Cart

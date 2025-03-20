@@ -16,7 +16,7 @@ export type Course = {
 };
 
 export interface CourseDetails {
-  id: number;
+  id: string;
   name: string;
   previewImage: {
     url: string;

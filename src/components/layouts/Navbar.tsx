@@ -16,9 +16,13 @@ const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="max-w-7xl mx-auto flex items-center justify-between  font-medium">
-        <Link to="/">
-          <img src={logo} alt="Logo" className="w-28" />
-        </Link>
+        <div className="flex items-center space-x-2">
+          <Link to="/">
+            <img src={logo} alt="Logo" className="w-28" />
+          </Link>
+
+          <p className="text-lg font-semibold">Digital Information Resources</p>
+        </div>
 
         <ul className="hidden sm:flex gap-5 text-sm text-gray-700">
           {['/', '/providers', '/about', '/contact'].map((path, index) => {
