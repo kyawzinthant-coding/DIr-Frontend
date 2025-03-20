@@ -7,13 +7,13 @@ import { Link } from 'react-router';
 function HeroSection() {
   return (
     <section
-      className="w-full bg-lines py-6 md:py-6 lg:py-6 bg-gradient-to-b from-background to-muted/30"
+      className="w-full bg-lines py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="hero-heading"
     >
-      <div className="container px-4 md:px-18">
-        <div className="grid gap-6 lg:grid-cols-[1fr_500px] lg:gap-12 h-[35vh] items-center xl:grid-cols-[1fr_550px]">
+      <div className="container px-4 md:px-8 lg:px-12">
+        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 h-auto items-center">
           {/* Left Section */}
-          <div className="flex flex-col justify-center space-y-6">
+          <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
             <div className="space-y-4">
               <Badge
                 variant="outline"
@@ -25,21 +25,21 @@ function HeroSection() {
 
               <h1
                 id="hero-heading"
-                className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl/none max-w-[700px]"
+                className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl max-w-[700px] mx-auto lg:mx-0"
               >
                 Inspire Young Minds with Engaging Learning!
               </h1>
 
               <h2 className="sr-only">Interactive Courses for Kids</h2>
 
-              <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed">
+              <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed mx-auto lg:mx-0">
                 Empower kids with interactive courses from Digital Kids,
                 National Geographic Learning & more. Fun, engaging, and designed
                 for young learners!
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+            <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link to="/providers" aria-label="Explore available courses">
                 <Button
                   size="lg"
@@ -57,15 +57,17 @@ function HeroSection() {
             </div>
           </div>
 
-          <div className="relative h-[300px] w-[100%] max-w-[600px] overflow-hidden rounded-xl md:h-[450px] lg:h-[360px]">
+          {/* Right Section - Image */}
+          <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] w-full max-w-[600px] mx-auto lg:mx-0 overflow-hidden rounded-xl">
             <img
               src={hero}
               decoding="async"
               alt="Children engaging in interactive learning activities with digital tools"
               className="w-full h-full object-cover rounded-lg"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
               width={800}
-              height={360}
+              height={400}
             />
           </div>
         </div>

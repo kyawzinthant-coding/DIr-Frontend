@@ -151,25 +151,20 @@ export default function CourseDetailsPage() {
               <TabsList className="w-full justify-start mb-8 bg-gray-100 p-1 rounded-xl">
                 <TabsTrigger
                   value="overview"
-                  className="rounded-lg py-3 px-6 text-base"
+                  className="rounded-lg py-3 px-6 text-base cursor-pointer"
                 >
                   Overview
                 </TabsTrigger>
                 <TabsTrigger
                   value="Requirements"
-                  className="rounded-lg py-3 px-6 text-base"
+                  className="rounded-lg py-3 px-6 text-base cursor-pointer"
                 >
                   Requirements
                 </TabsTrigger>
-                <TabsTrigger
-                  value="instructor"
-                  className="rounded-lg py-3 px-6 text-base"
-                >
-                  Instructor
-                </TabsTrigger>
+
                 <TabsTrigger
                   value="FAQ"
-                  className="rounded-lg py-3 px-6 text-base"
+                  className="rounded-lg py-3 px-6 text-base cursor-pointer"
                 >
                   FAQ
                 </TabsTrigger>
@@ -182,20 +177,6 @@ export default function CourseDetailsPage() {
                   </h2>
                   <div className="prose max-w-none text-gray-600 text-lg space-y-4">
                     <p>{course.description}</p>
-                    {/* <p>
-                      This course is part of the {series.name} series by{' '}
-                      {provider.name}, a leading provider of educational
-                      content. Whether you're a beginner or looking to advance
-                      your skills, this course offers structured learning that
-                      will help you achieve your goals.
-                    </p>
-                    <p>
-                      Throughout this {course.duration} course, you'll learn
-                      through a combination of video lectures, interactive
-                      exercises, quizzes, and real-world projects. By the end,
-                      you'll have both theoretical knowledge and practical
-                      experience that you can apply immediately.
-                    </p> */}
                   </div>
                 </div>
 
@@ -204,7 +185,7 @@ export default function CourseDetailsPage() {
                     What You'll Learn
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* {(
+                    {(
                       course.learningPoints || [
                         'Comprehensive understanding of core concepts',
                         'Practical skills through hands-on exercises',
@@ -221,7 +202,7 @@ export default function CourseDetailsPage() {
                         <Check className="mr-3 h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-lg">{point}</span>
                       </div>
-                    ))} */}
+                    ))}
                   </div>
                 </div>
               </TabsContent>
@@ -245,43 +226,6 @@ export default function CourseDetailsPage() {
                     </Card>
                   ))}
                 </div>
-              </TabsContent>
-
-              <TabsContent value="instructor">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  Your Instructor
-                </h2>
-                <Card className="border-0 shadow-md rounded-xl overflow-hidden">
-                  <CardContent className="p-8">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      <div className="w-32 h-32 relative rounded-full overflow-hidden border-4 border-blue-100 flex-shrink-0">
-                        <img
-                          src="https://via.placeholder.com/128x128"
-                          alt="Instructor"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900">
-                          {/* Author {course.author[0]} */}
-                        </h3>
-
-                        <div className="flex items-center mt-6 space-x-6">
-                          <div className="flex items-center text-gray-700">
-                            <Users size={20} className="mr-2 text-blue-600" />
-                            <span className="font-medium">
-                              10,000+ students
-                            </span>
-                          </div>
-                          <div className="flex items-center text-gray-700">
-                            <Award size={20} className="mr-2 text-blue-600" />
-                            <span className="font-medium">15+ courses</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
               </TabsContent>
 
               <TabsContent value="FAQ">
