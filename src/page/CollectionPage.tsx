@@ -71,13 +71,13 @@ const CollectionPage = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {providerData &&
-              filteredProviders.map((provider: Provider) => (
+              filteredProviders.map((provider: Provider, index: number) => (
                 <Link
                   to={`/providers/${provider.id}/series`}
                   key={provider.id}
                   className="block"
                 >
-                  <ProviderCard provider={provider} />
+                  <ProviderCard provider={provider} index={index} />
                 </Link>
               ))}
           </div>
