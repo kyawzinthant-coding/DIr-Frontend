@@ -185,8 +185,7 @@ export default function CourseDetailsPage() {
                     What You'll Learn
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {(
-                      course.learningPoints || [
+                    {/* [
                         'Comprehensive understanding of core concepts',
                         'Practical skills through hands-on exercises',
                         'Problem-solving techniques for real-world scenarios',
@@ -202,7 +201,7 @@ export default function CourseDetailsPage() {
                         <Check className="mr-3 h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700 text-lg">{point}</span>
                       </div>
-                    ))}
+                    )) */}
                   </div>
                 </div>
               </TabsContent>
