@@ -1,6 +1,6 @@
 import { useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import dirLogo from '../assets/insiderImages/ResizedAboutUs.jpg';
+import dirLogo from '../../assets/insiderImages/ResizedAboutUs.jpg';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 

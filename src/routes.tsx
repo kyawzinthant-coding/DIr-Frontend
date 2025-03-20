@@ -1,8 +1,8 @@
 import { createBrowserRouter, redirect } from 'react-router';
-import Home from '@/page/Home';
-import Contact from '@/page/Contact';
-import ErrorPage from '@/page/Error';
-import RootLayout from '@/page/RootLayout';
+import Home from '@/page/LandingPage/Home';
+import Contact from '@/page/LandingPage/Contact';
+import ErrorPage from '@/page/Utils/Error';
+import RootLayout from '@/page/Utils/RootLayout';
 import Login from './features/auth/Login';
 // import Register from './features/auth/Register';
 
@@ -30,6 +30,7 @@ import ProviderSeriesPage from './page/ProviderSeriesPage';
 import SeriesCoursePage from './page/SeriesCoursePage';
 import CourseDetailsPage from './page/CourseDetailsPage';
 import { Suspense } from 'react';
+import CheckOut from './page/CheckOut';
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
       {
         path: 'contact',
         element: <Contact />,
+      },
+      {
+        path: 'checkout',
+        element: <CheckOut />,
       },
       {
         path: 'providers',

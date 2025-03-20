@@ -22,6 +22,7 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
       return { error: response.data || 'Login Failed!' };
     }
     await queryClient.invalidateQueries({ queryKey: ['me'] });
+    useAuthDataStore.getState().setUser(response.data);
     const redirectTo = new URL(request.url).searchParams.get('redirect') || '/';
 
     return redirect(redirectTo);
@@ -35,13 +36,15 @@ export const loginAction = async ({ request }: ActionFunctionArgs) => {
 export const logoutAction = async () => {
   try {
     await api.post('auth/logout');
-    await queryClient.invalidateQueries({ queryKey: ['me'] });
-    useAuthDataStore.getState().setUser(null);
-    return redirect('/login');
   } catch (error) {
     console.error('Logout failed:', error);
-    return { error: 'Logout failed' };
   }
+
+  // Ensure user state is cleared even if API request fails
+  useAuthDataStore.getState().logout();
+  await queryClient.invalidateQueries({ queryKey: ['me'] });
+
+  return redirect('/login');
 };
 
 export const registerAction = async ({ request }: ActionFunctionArgs) => {
@@ -93,6 +96,8 @@ export const createaccountAction = async ({ request }: ActionFunctionArgs) => {
     }
 
     authStore.clearAuth();
+    await queryClient.invalidateQueries({ queryKey: ['me'] });
+    useAuthDataStore.getState().setUser(response.data);
     const redirectTo = new URL(request.url).searchParams.get('redirect') || '/';
 
     return redirect(redirectTo);

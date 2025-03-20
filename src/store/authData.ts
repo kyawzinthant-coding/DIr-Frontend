@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
 type User = {
   id: string;
@@ -15,11 +16,12 @@ type AuthState = {
 
 export const useAuthDataStore = create<AuthState>()(
   persist(
-    (set) => ({
+    immer((set) => ({
       user: null,
+
       setUser: (user) => set({ user }),
       logout: () => set({ user: null }),
-    }),
-    { name: 'auth-storage' }
+    })),
+    { name: 'auth-storage', storage: createJSONStorage(() => sessionStorage) }
   )
 );

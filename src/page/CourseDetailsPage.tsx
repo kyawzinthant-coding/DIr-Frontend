@@ -4,10 +4,6 @@ import { useState } from 'react';
 import { Link, useLoaderData, useParams } from 'react-router';
 import {
   ArrowLeft,
-  Clock,
-  BookOpen,
-  Users,
-  Award,
   ShoppingCart,
   Check,
   CircleCheck,
@@ -15,7 +11,7 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { Badge } from '../components/ui/badge';
+
 import {
   Tabs,
   TabsContent,
@@ -88,17 +84,14 @@ export default function CourseDetailsPage() {
           </Link>
 
           <div className="flex flex-col lg:flex-row gap-8 items-start">
-            <div className="w-full lg:w-80 h-80 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
+            <div className="w-full lg:w-80 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
                 src={course.previewImage.url}
                 alt={course.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="flex-1">
-              <Badge className="bg-blue-700 hover:bg-blue-800 px-4 py-2 text-base rounded-full mb-4">
-                {/* {series.category} */}
-              </Badge>
               <h1 className="text-4xl font-bold tracking-tight">
                 {course.name}
               </h1>
@@ -110,7 +103,7 @@ export default function CourseDetailsPage() {
               <div className="flex flex-wrap gap-4 mt-8">
                 <Button
                   size="lg"
-                  className={`rounded-xl px-8 py-6 h-auto text-lg font-medium ${
+                  className={`rounded-xl px-8 py-6 md:w-[200px] cursor-pointer h-auto text-lg font-medium ${
                     isInCart
                       ? 'bg-green-600 hover:bg-green-700'
                       : 'bg-orange-500 hover:bg-orange-600'
@@ -125,7 +118,7 @@ export default function CourseDetailsPage() {
                     </>
                   ) : (
                     <>
-                      <ShoppingCart className="mr-2 h-6 w-6" />
+                      <ShoppingCart className="mr-2 h-6 w-12" />
                       Add to Cart
                     </>
                   )}
@@ -293,43 +286,9 @@ export default function CourseDetailsPage() {
                   Course Details
                 </h3>
 
-                <div className="space-y-5">
-                  <div className="flex items-center text-gray-700">
-                    <Clock className="mr-4 h-6 w-6 text-blue-600" />
-                    <div>
-                      <div className="font-medium text-lg">Duration</div>
-                      {/* <div className="text-gray-500">{course.duration}</div> */}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center text-gray-700">
-                    <BookOpen className="mr-4 h-6 w-6 text-blue-600" />
-                    <div>
-                      <div className="font-medium text-lg">Lessons</div>
-                      <div className="text-gray-500">24 lessons</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center text-gray-700">
-                    <Users className="mr-4 h-6 w-6 text-blue-600" />
-                    <div>
-                      <div className="font-medium text-lg">Enrolled</div>
-                      <div className="text-gray-500">1,240 students</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center text-gray-700">
-                    <Award className="mr-4 h-6 w-6 text-blue-600" />
-                    <div>
-                      <div className="font-medium text-lg">Certificate</div>
-                      <div className="text-gray-500">Yes, upon completion</div>
-                    </div>
-                  </div>
-                </div>
-
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <Button
-                    className={`w-full rounded-xl px-6 py-5 h-auto text-base font-medium ${
+                    className={`w-full rounded-xl cursor-pointer px-6 py-5 h-auto text-base font-medium ${
                       isInCart
                         ? 'bg-green-600 hover:bg-green-700'
                         : 'bg-orange-500 hover:bg-orange-600'

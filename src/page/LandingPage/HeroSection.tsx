@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import hero from '../assets/insiderImages/hero.png';
+import hero from '../../assets/insiderImages/hero.png';
 import { Badge } from '@/components/ui/badge';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';

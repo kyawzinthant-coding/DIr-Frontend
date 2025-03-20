@@ -22,12 +22,17 @@ interface UserProps {
 function AuthDropDown({ user }: UserProps) {
   if (!user) {
     return (
-      <Button className="cursor-pointer hidden md:block" size="sm" asChild>
-        <Link to="/login">
-          Sign In
-          <span className="sr-only">Sign In</span>
-        </Link>
-      </Button>
+      <>
+        <Button
+          className="cursor-pointer  items-center justify-center hidden md:flex"
+          size="sm"
+          asChild
+        >
+          <Link to="/login">
+            <span className="text-sm">Sign In</span>
+          </Link>
+        </Button>
+      </>
     );
   }
 

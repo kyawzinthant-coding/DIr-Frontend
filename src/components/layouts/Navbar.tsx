@@ -7,6 +7,7 @@ import { useAuthDataStore } from '@/store/authData';
 import { Button } from '../ui/button';
 import { Menu, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
+import CartSheet from './CartSheet';
 
 const Navbar: React.FC = () => {
   const { user } = useAuthDataStore();
@@ -43,7 +44,8 @@ const Navbar: React.FC = () => {
           })}
         </ul>
 
-        <div className=" items-center gap-6 hidden md:block">
+        <div className=" items-center gap-6 hidden md:flex">
+          <CartSheet />
           <AuthDropDown user={user} />
         </div>
 

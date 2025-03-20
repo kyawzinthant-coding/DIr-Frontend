@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
-import { ArrowLeft, Search } from 'lucide-react';
+import { ArrowLeft, BookOpen, Search } from 'lucide-react';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 
@@ -23,8 +23,6 @@ export default function SeriesCoursesPage() {
     course.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  console.log(filteredCourses);
-
   return (
     <div className="min-h-screen">
       <header className="bg-gradient-to-r from-blue-600 to-blue-700 text-white">
@@ -38,23 +36,25 @@ export default function SeriesCoursesPage() {
           </Link>
 
           <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="w-full md:w-64 h-80 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
+            <div className="w-full md:w-64 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
                 src={`${seriesData.image.url}`}
                 alt={seriesData.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
             </div>
-            <div>
-              <div className="inline-block px-4 py-2 bg-blue-700 text-white text-sm font-medium rounded-full mb-4">
-                {/* {series.category} */}
-              </div>
+            <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tight">
                 {seriesData.name}
               </h1>
-              <p className="text-xl text-blue-100 mt-3">
-                {seriesData._count.courses} Courses Available
-              </p>
+              <div className="grid grid-cols-1  sm:grid-cols-3 gap-3 ">
+                <div className="flex items-center justify-center  bg-orange-500/10 border-orange-500/10 sm:justify-start gap-2  rounded-lg p-2">
+                  <BookOpen className="h-6 w-6 text-orange-500 " />
+                  <span className="text-md  text-orange-500 font-bold  ">
+                    {seriesData._count.courses} Courses available
+                  </span>
+                </div>
+              </div>
               <p className="text-white mt-6 max-w-2xl text-lg">
                 {seriesData.description}
               </p>

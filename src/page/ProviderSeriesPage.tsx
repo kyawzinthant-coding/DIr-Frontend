@@ -20,6 +20,8 @@ export default function ProviderSeriesPage() {
   const provider: Provider = seriesList.provider;
   const [searchQuery, setSearchQuery] = useState('');
 
+
+  console.log(provider);
   if (!series.length) {
     return (
       <div className="container mx-auto px-6 py-20 text-center">
@@ -49,17 +51,28 @@ export default function ProviderSeriesPage() {
             Back to Providers
           </Link>
           <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-            <div className="w-32 h-32 flex-shrink-0 bg-white rounded-2xl border-2 shadow-md overflow-hidden">
+            <div className="w-full md:w-64 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
               <img
-                src={provider.image.url}
+                src={`${provider.image.url}`}
                 alt={provider.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-fit"
               />
             </div>
-            <div>
-              <h1 className="text-4xl font-bold">{provider.name}</h1>
-              <p className="text-xl text-orange-100 mt-3">
-                {series.length} Series Available
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tight">
+                {provider.name}
+              </h1>
+
+              <div className="grid grid-cols-1  sm:grid-cols-3 gap-3 ">
+                <div className="flex items-center justify-center border border-[#2563EB]/10 sm:justify-start gap-2 bg-[#2563EB]/10 rounded-lg p-2">
+                  <BookOpen className="h-4 w-4 text-[#2563EB]" />
+                  <span className="text-sm  text-[#153f9c] font-bold  ">
+                    {series.length} Series available
+                  </span>
+                </div>
+              </div>
+              <p className="text-white max-w-2xl text-lg">
+                {provider.description}
               </p>
             </div>
           </div>
@@ -109,7 +122,7 @@ export default function ProviderSeriesPage() {
             {filteredSeries.map((series) => (
               <Card
                 key={series.id}
-                className="h-full overflow-hidden transition-all duration-300 hover:shadow-lg border-0 shadow-md rounded-2xl"
+                className="h-full overflow-hidden ring-1 ring-gray-200 transition-all duration-300 hover:shadow-lg border-0 shadow-md rounded-2xl"
               >
                 <div className="w-full h-56 relative">
                   <img

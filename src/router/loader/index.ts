@@ -17,8 +17,6 @@ export const loginLoader = async () => {
   try {
     const response = await authApi.get('auth/auth-check');
 
-    console.log(response);
-
     if (response.status !== 200) {
       return null;
     }
@@ -44,8 +42,9 @@ export const authLoader = async () => {
       queryKey: ['me'],
       queryFn: fetchMe,
       staleTime: 1000 * 60 * 5,
-      retry: false,
+      retry: true,
     });
+
     useAuthDataStore.getState().setUser(user);
     return user;
   } catch {
