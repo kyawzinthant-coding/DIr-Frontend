@@ -6,9 +6,7 @@ import compression from 'vite-plugin-compression';
 
 // https://vite.dev/config/
 export default defineConfig({
-  build: {
-    minify: 'terser', // Minifies JS
-  },
+
   plugins: [
     react(),
     tailwindcss(),
