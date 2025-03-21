@@ -21,7 +21,7 @@ export default function ProviderSeriesPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
 
-  console.log(provider);
+
   if (!series.length) {
     return (
       <div className="container mx-auto px-6 py-20 text-center">
@@ -55,6 +55,9 @@ export default function ProviderSeriesPage() {
               <img
                 src={`${provider.image.url}`}
                 alt={provider.name}
+                width={300}
+                height={200}
+                loading="lazy"
                 className="w-full h-full object-fit"
               />
             </div>
@@ -128,6 +131,7 @@ export default function ProviderSeriesPage() {
                   <img
                     src={series.image.url}
                     alt={series.name}
+                    loading="lazy"
                     className="w-full h-full object-contain"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>

@@ -12,6 +12,9 @@ const CourseCard = ({ course, series }: { course: course; series: series }) => {
           <img
             src={`${course.previewImage.url}`}
             alt={course.name}
+            width={200}
+            height={200}
+            loading="lazy"
             className="  h-full object-contain"
           />
         </div>

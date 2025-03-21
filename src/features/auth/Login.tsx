@@ -14,7 +14,13 @@ function Login() {
               to="/"
               className="fixed left-8 top-6 flex items-center text-lg font-bold tracking-tight text-foreground/80 transition-colors hover:text-foreground"
             >
-              <img src="/src/assets/dirlogoC.svg" alt="Dir Logo" />
+              <img
+                src="/src/assets/dirlogoC.svg"
+                loading="lazy"
+                width={200}
+                height={200}
+                alt="Dir Logo"
+              />
             </Link>
           </div>
           <div className="relative z-20 mt-auto"></div>
@@ -23,6 +29,7 @@ function Login() {
             <img
               src="/src/assets/insiderImages/ResizedAboutUs.jpg"
               alt=""
+              loading="lazy"
               className="h-full w-full object-cover opacity-20"
             />
           </div>

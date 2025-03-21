@@ -58,6 +58,9 @@ export default function CartSheet() {
                       <img
                         src={item.previewImage.url}
                         alt={item.name}
+                        width={200}
+                        height={200}
+                        loading="lazy"
                         className="size-18 rounded"
                       />
                       <div className="ml-4">

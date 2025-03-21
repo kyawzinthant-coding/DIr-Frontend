@@ -22,6 +22,9 @@ const ProviderCard = ({
           <img
             src={provider.image.url}
             alt={`${provider.name} cover`}
+            width={300}
+            height={200}
+            loading="lazy"
             className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-105"
           />
         </div>

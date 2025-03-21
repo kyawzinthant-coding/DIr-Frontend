@@ -56,7 +56,6 @@ export const authLoader = async () => {
 export const collectionLoader = async () => {
   try {
     const response = await api.get('user/providers');
-    console.log(response.data);
     return { providerData: response.data };
   } catch (error) {
     console.log('Collection Loader error', error);

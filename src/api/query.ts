@@ -2,6 +2,7 @@ import api, { authApi } from '.';
 
 export const fetchMe = async () => {
   const response = await authApi.get('auth/me');
+  console.log(response);
   return response.data;
 };
 

@@ -28,6 +28,8 @@ function AboutUs() {
                 className="w-full h-[600px] object-cover"
                 decoding="async"
                 loading="lazy"
+                width={300}
+                height={200}
               />
             </div>
           </div>

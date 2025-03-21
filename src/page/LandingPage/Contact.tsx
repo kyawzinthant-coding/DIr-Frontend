@@ -48,8 +48,8 @@ const ContactUs = () => {
   }
 
   return (
-    <div className="min-h-screen mt-16 flex justify-center bg-gray-100 p-8">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-6xl flex flex-col md:flex-row">
+    <div className="min-h-screen mt-16 flex justify-center  p-8">
+      <div className=" shadow-lg rounded-lg overflow-hidden w-full max-w-6xl flex flex-col md:flex-row">
         {/* Left - Contact Form */}
         <div className="w-full md:w-2/3 p-10">
           <h2 className="text-3xl font-bold text-gray-800 mb-4">

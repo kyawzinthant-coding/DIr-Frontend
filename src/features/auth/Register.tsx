@@ -8,7 +8,13 @@ function Register() {
         to="/"
         className="fixed left-8 top-6 flex items-center text-lg font-bold tracking-tight text-foreground/80 transition-colors hover:text-foreground"
       >
-        <img src="/src/assets/dirlogo.png" alt="Dir Logo" />
+        <img
+          src="/src/assets/dirlogo.png"
+          width={200}
+          height={200}
+          loading="lazy"
+          alt="Dir Logo"
+        />
       </Link>
       <main className="grid min-h-screen grid-cols-1 ">
         <div className="flex w-full place-items-center px-4">

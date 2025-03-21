@@ -21,6 +21,7 @@ const useCartStore = create<State & Actions>()(
   persist(
     immer((set) => ({
       ...initialState,
+
       addItem: (item: CourseDetails) =>
         set((state: { items: CourseDetails[] }) => {
           if (state.items.some((i) => i.id === item.id)) {
@@ -28,6 +29,7 @@ const useCartStore = create<State & Actions>()(
           }
           state.items.push(item);
         }),
+
       removeItem: (id: string) =>
         set((state: { items: CourseDetails[] }) => {
           state.items = state.items.filter(

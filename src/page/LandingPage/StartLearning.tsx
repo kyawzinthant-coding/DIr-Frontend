@@ -46,7 +46,10 @@ const StartLearning = () => {
                   <div className="flex items-center justify-center py-4">
                     <img
                       src={course.image.url}
+                      loading="lazy"
                       alt={course.name}
+                      width={200}
+                      height={200}
                       className="w-[200px] h-full  object-contain rounded-2xl"
                     />
                   </div>

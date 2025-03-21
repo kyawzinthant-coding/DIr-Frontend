@@ -88,6 +88,9 @@ export default function CourseDetailsPage() {
               <img
                 src={course.previewImage.url}
                 alt={course.name}
+                loading="lazy"
+                width={300}
+                height={200}
                 className="w-full h-full object-contain"
               />
             </div>

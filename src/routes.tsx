@@ -1,10 +1,16 @@
 import { createBrowserRouter, redirect } from 'react-router';
-import Home from '@/page/LandingPage/Home';
-import Contact from '@/page/LandingPage/Contact';
+import { lazy, Suspense } from 'react';
 import ErrorPage from '@/page/Utils/Error';
 import RootLayout from '@/page/Utils/RootLayout';
-import Login from './features/auth/Login';
-// import Register from './features/auth/Register';
+import AuthRootLayout from '@/features/auth/AuthRootLayout';
+import ProviderLayout from './features/course/ProviderLayout';
+import CheckOut from './page/CheckOut';
+import React from 'react';
+
+const Contact = lazy(() => import('@/page/LandingPage/Contact'));
+const Login = lazy(() => import('./features/auth/Login'));
+const SignUpPage = lazy(() => import('@/features/auth/SignUp'));
+const Register = lazy(() => import('./features/auth/Register'));
 
 import {
   createaccountAction,
@@ -20,17 +26,25 @@ import {
   ProviderLoader,
   SeriesLoader,
 } from './router/loader';
-import SignUpPage from '@/features/auth/SignUp';
-import AuthRootLayout from '@/features/auth/AuthRootLayout';
-import Register from './features/auth/Register';
-import Product from './page/Product';
-import CollectionPage from './page/CollectionPage';
-import ProviderLayout from './features/course/ProviderLayout';
-import ProviderSeriesPage from './page/ProviderSeriesPage';
-import SeriesCoursePage from './page/SeriesCoursePage';
-import CourseDetailsPage from './page/CourseDetailsPage';
-import { Suspense } from 'react';
-import CheckOut from './page/CheckOut';
+import Home from './page/LandingPage/Home';
+import Loader from './lib/Loader';
+
+const Collection = lazy(() => import('./page/CollectionPage'));
+const ProviderSeriesPage = lazy(() => import('./page/ProviderSeriesPage'));
+const SeriesCoursePage = lazy(() => import('./page/SeriesCoursePage'));
+const CourseDetailsPage = lazy(() => import('./page/CourseDetailsPage'));
+
+const withSuspense = (Component: React.FC) => (
+  <Suspense
+    fallback={
+      <div className="text-center h-[80vh] flex items-center justify-center">
+        <Loader />
+      </div>
+    }
+  >
+    <Component />
+  </Suspense>
+);
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +59,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'contact',
-        element: <Contact />,
+        element: withSuspense(Contact),
       },
       {
         path: 'checkout',
@@ -58,62 +72,30 @@ export const router = createBrowserRouter([
           {
             index: true,
             loader: ProviderLoader,
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <CollectionPage />
-              </Suspense>
-            ),
+            element: withSuspense(Collection),
           },
           {
             path: ':providerId/series',
             loader: SeriesLoader,
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <ProviderSeriesPage />
-              </Suspense>
-            ),
+            element: withSuspense(ProviderSeriesPage),
           },
           {
             path: ':providerId/series/:seriesId',
             loader: CoursesLoader,
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <SeriesCoursePage />
-              </Suspense>
-            ),
+            element: withSuspense(SeriesCoursePage),
           },
           {
             path: ':providerId/series/:seriesId/courses/:courseId',
             loader: courseDetailsLoader,
-            element: (
-              <Suspense
-                fallback={<div className="text-center">Loading...</div>}
-              >
-                <CourseDetailsPage />
-              </Suspense>
-            ),
+            element: withSuspense(CourseDetailsPage),
           },
         ],
-      },
-      {
-        path: 'product',
-        element: <Product />,
-      },
-      {
-        path: 'collection-one',
-        element: <CollectionPage />,
       },
     ],
   },
   {
     path: '/login',
-    element: <Login />,
+    element: withSuspense(Login),
     action: loginAction,
     loader: loginLoader,
   },
@@ -123,13 +105,13 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <SignUpPage />,
+        element: withSuspense(SignUpPage),
         loader: loginLoader,
         action: registerAction,
       },
       {
         path: 'form',
-        element: <Register />,
+        element: withSuspense(Register),
         loader: emailCheckLoader,
         action: createaccountAction,
       },

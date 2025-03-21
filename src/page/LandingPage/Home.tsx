@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 
 function Home() {
   return (
-    <main className="w-full p-6 lg:px-32 py-8 md:py-19 lg:py-24 xl:py-18 bg-lines antialiased  h-full  overflow-x-hidden">
+    <main className="w-full p-6 lg:px-32 py-8 md:py-19 lg:py-24 xl:py-18  antialiased  h-full  overflow-x-hidden">
       <HeroSection />
       <Service />
       <StartLearning />

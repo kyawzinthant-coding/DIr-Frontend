@@ -40,6 +40,7 @@ export default function SeriesCoursesPage() {
               <img
                 src={`${seriesData.image.url}`}
                 alt={seriesData.name}
+                loading="lazy"
                 className="w-full h-full object-fit"
               />
             </div>

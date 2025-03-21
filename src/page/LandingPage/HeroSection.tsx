@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 function HeroSection() {
   return (
     <section
-      className="w-full bg-lines py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
+      className="w-full  py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="hero-heading"
     >
       <div className="container px-4 md:px-8 lg:px-12">
@@ -64,7 +64,7 @@ function HeroSection() {
               decoding="async"
               alt="Children engaging in interactive learning activities with digital tools"
               className="w-full h-full object-cover rounded-lg"
-              loading="eager"
+              loading="lazy"
               fetchPriority="high"
               width={800}
               height={400}

@@ -18,7 +18,6 @@ export const useAuthDataStore = create<AuthState>()(
   persist(
     immer((set) => ({
       user: null,
-
       setUser: (user) => set({ user }),
       logout: () => set({ user: null }),
     })),
