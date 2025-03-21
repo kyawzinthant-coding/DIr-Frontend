@@ -8,7 +8,3 @@
   status = 200
 
   
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Encoding = "br"
