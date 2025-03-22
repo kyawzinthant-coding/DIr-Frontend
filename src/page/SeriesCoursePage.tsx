@@ -11,7 +11,6 @@ import { course, series } from '@/assets/data/providerData';
 
 export default function SeriesCoursesPage() {
   const { seriesId, providerId } = useLoaderData();
-
   const { data: coursesData } = useSuspenseQuery(SeriesCoursesQuery(seriesId));
 
   const courses: course[] = coursesData.courses;
@@ -29,7 +28,7 @@ export default function SeriesCoursesPage() {
         <div className="container mx-auto px-6 py-12">
           <Link
             to={`/providers/${providerId}/series`}
-            className="inline-flex items-center text-white hover:text-blue-100 mb-6 text-lg font-medium"
+            className="inline-flex items-center text-white hover:text-blue-100 transition-colors duration-300 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to {seriesData.name} Series
@@ -41,17 +40,18 @@ export default function SeriesCoursesPage() {
                 src={`${seriesData.image.url}`}
                 alt={seriesData.name}
                 loading="lazy"
-                className="w-full h-full object-fit"
+                className="w-full h-full object-contain max-h-60"
+                /* Replaced object-fit with object-contain to keep series image fully visible and contained on small screens */
               />
             </div>
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tight">
                 {seriesData.name}
               </h1>
-              <div className="grid grid-cols-1  sm:grid-cols-3 gap-3 ">
-                <div className="flex items-center justify-center  bg-orange-500/10 border-orange-500/10 sm:justify-start gap-2  rounded-lg p-2">
-                  <BookOpen className="h-6 w-6 text-orange-500 " />
-                  <span className="text-md  text-orange-500 font-bold  ">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="flex items-center justify-center bg-orange-500/10 border border-orange-500/10 sm:justify-start gap-2 rounded-lg p-2">
+                  <BookOpen className="h-6 w-6 text-orange-500" />
+                  <span className="text-md text-orange-500 font-bold">
                     {seriesData._count.courses} Courses available
                   </span>
                 </div>
@@ -83,7 +83,7 @@ export default function SeriesCoursesPage() {
             <Input
               type="text"
               placeholder="Search courses..."
-              className="pl-10 py-6 text-base border-gray-200 rounded-xl shadow-sm"
+              className="pl-10 py-6 text-base border-gray-200 rounded-xl shadow-sm focus:ring-2 focus:ring-blue-400"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -97,8 +97,9 @@ export default function SeriesCoursesPage() {
             </p>
             <Button
               variant="link"
-              className="text-blue-600 mt-4 text-lg"
+              className="text-blue-600 mt-4 text-lg cursor-pointer"
               onClick={() => setSearchQuery('')}
+              /* Ensured the Clear search link shows a pointer cursor */
             >
               Clear search
             </Button>

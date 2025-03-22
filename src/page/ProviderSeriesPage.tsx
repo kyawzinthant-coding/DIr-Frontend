@@ -20,8 +20,6 @@ export default function ProviderSeriesPage() {
   const provider: Provider = seriesList.provider;
   const [searchQuery, setSearchQuery] = useState('');
 
-
-
   if (!series.length) {
     return (
       <div className="container mx-auto px-6 py-20 text-center">
@@ -45,7 +43,7 @@ export default function ProviderSeriesPage() {
         <div className="container mx-auto px-6 py-12">
           <Link
             to="/providers"
-            className="inline-flex items-center text-white hover:text-orange-100 mb-6 text-lg font-medium"
+            className="inline-flex items-center text-white hover:text-orange-100 transition-colors duration-300 mb-6 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Providers
@@ -58,18 +56,17 @@ export default function ProviderSeriesPage() {
                 width={300}
                 height={200}
                 loading="lazy"
-                className="w-full h-full object-fit"
+                className="w-full h-full object-contain"
               />
             </div>
             <div className="space-y-4">
               <h1 className="text-4xl font-bold tracking-tight">
                 {provider.name}
               </h1>
-
-              <div className="grid grid-cols-1  sm:grid-cols-3 gap-3 ">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="flex items-center justify-center border border-[#2563EB]/10 sm:justify-start gap-2 bg-[#2563EB]/10 rounded-lg p-2">
                   <BookOpen className="h-4 w-4 text-[#2563EB]" />
-                  <span className="text-sm  text-[#153f9c] font-bold  ">
+                  <span className="text-sm text-[#153f9c] font-bold">
                     {series.length} Series available
                   </span>
                 </div>
@@ -92,15 +89,15 @@ export default function ProviderSeriesPage() {
               Browse series from {provider.name}
             </p>
           </div>
-          <div className="relative w-full md:w-96">
+          <div className="relative bg-white w-full md:w-96">
             <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               size={20}
             />
             <Input
               type="text"
               placeholder="Search series..."
-              className="pl-10 py-4 text-base border-gray-200 rounded-xl shadow-sm"
+              className="pl-10 py-6 text-base border-gray-200 rounded-xl shadow-sm"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -114,7 +111,7 @@ export default function ProviderSeriesPage() {
             </p>
             <Button
               variant="link"
-              className="text-blue-600 mt-4 text-lg"
+              className="text-blue-600 mt-4 text-lg cursor-pointer"
               onClick={() => setSearchQuery('')}
             >
               Clear search
@@ -125,7 +122,7 @@ export default function ProviderSeriesPage() {
             {filteredSeries.map((series) => (
               <Card
                 key={series.id}
-                className="h-full overflow-hidden ring-1 ring-gray-200 transition-all duration-300 hover:shadow-lg border-0 shadow-md rounded-2xl"
+                className="h-full overflow-hidden ring-1 ring-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-0 shadow-md rounded-2xl"
               >
                 <div className="w-full h-56 relative">
                   <img
@@ -169,7 +166,7 @@ export default function ProviderSeriesPage() {
                     )}
                   </div>
                 </CardContent>
-                <CardFooter className="px-4 pt-0">
+                <CardFooter className="px-4 pt-0 pb-4">
                   <Button
                     onClick={() => {
                       if (series._count.courses > 0) {
@@ -179,7 +176,7 @@ export default function ProviderSeriesPage() {
                       }
                     }}
                     disabled={series._count.courses === 0}
-                    className={`w-full rounded-xl cursor-pointer py-6 text-base font-medium transition-all duration-300 ${
+                    className={`group w-full rounded-xl cursor-pointer py-6 text-base font-medium transition-all duration-300 ${
                       series._count.courses > 0
                         ? 'bg-orange-600 hover:bg-orange-700'
                         : 'bg-gray-400 cursor-not-allowed'

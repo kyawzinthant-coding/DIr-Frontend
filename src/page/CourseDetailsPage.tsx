@@ -11,13 +11,15 @@ import {
 } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-
 import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '../components/ui/tabs';
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { CourseDetails } from '@/assets/data/providerData';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { CourseDetailsQuery } from '@/api/query';
@@ -26,15 +28,11 @@ import useCartStore from '@/store/cartStore';
 
 export default function CourseDetailsPage() {
   const { providerId, seriesId } = useParams();
-
   const { courseId } = useLoaderData();
-
   const { data } = useSuspenseQuery(CourseDetailsQuery(courseId));
 
   const course: CourseDetails = data.course;
-
   const [isInCart, setIsInCart] = useState(false);
-
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
@@ -47,6 +45,30 @@ export default function CourseDetailsPage() {
 
   const { addItem } = useCartStore();
   const { items } = useCartStore.getState();
+
+  const [previewOpen, setPreviewOpen] = useState(false);
+
+  function getEmbedUrl(videoUrl: string): string {
+    try {
+      const url = new URL(videoUrl);
+
+      if (url.hostname === 'youtu.be') {
+        const videoId = url.pathname.slice(1);
+        return `https://www.youtube.com/embed/${videoId}`;
+      }
+
+      if (url.hostname.includes('youtube.com')) {
+        const videoId = url.searchParams.get('v');
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      return videoUrl;
+    } catch {
+      return videoUrl;
+    }
+  }
 
   const faqData = [
     {
@@ -77,7 +99,8 @@ export default function CourseDetailsPage() {
         <div className="container mx-auto px-6 py-12">
           <Link
             to={`/providers/${providerId}/series/${seriesId}`}
-            className="inline-flex items-center text-white hover:text-blue-100 mb-6 text-lg font-medium"
+            className="inline-flex items-center text-white hover:text-blue-100 transition-colors duration-300 mb-6 text-lg font-medium"
+            /* Added transition on hover for smoother color change */
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Courses
@@ -98,7 +121,6 @@ export default function CourseDetailsPage() {
               <h1 className="text-4xl font-bold tracking-tight">
                 {course.name}
               </h1>
-
               <p className="mt-6 text-blue-50 max-w-3xl text-lg">
                 {course.description}
               </p>
@@ -107,7 +129,7 @@ export default function CourseDetailsPage() {
                 <Button
                   onClick={() => addItem(course)}
                   size="lg"
-                  className={`rounded-xl px-8 py-6 md:w-[200px] cursor-pointer h-auto text-lg font-medium ${
+                  className={`rounded-xl px-8 py-6 md:w-[200px] cursor-pointer h-auto text-lg font-medium transition-colors duration-300 ${
                     items.some((i) => i.id === course.id)
                       ? 'bg-green-600 hover:bg-green-700'
                       : 'bg-orange-500 hover:bg-orange-600'
@@ -121,19 +143,77 @@ export default function CourseDetailsPage() {
                     </>
                   ) : (
                     <>
-                      <ShoppingCart className="mr-2 h-6 w-12" />
+                      <ShoppingCart className="mr-2 h-6 w-6" />
                       Add to Cart
                     </>
                   )}
                 </Button>
 
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-white/10 text-white border-white/20 hover:bg-white/20 rounded-xl px-8 py-6 h-auto text-lg font-medium"
-                >
-                  Preview Course
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="bg-white/10 text-white border-white/20 hover:bg-white/20 rounded-xl px-8 py-6 h-auto text-lg font-medium transition-colors duration-300"
+                    >
+                      Preview Course
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-3xl">
+                    <DialogHeader>
+                      <DialogTitle>Course Preview</DialogTitle>
+                    </DialogHeader>
+                    {course.video_preview ||
+                    (course.CourseImages && course.CourseImages.length > 0) ? (
+                      <Tabs
+                        defaultValue={course.video_preview ? 'video' : 'images'}
+                        className="mt-4"
+                      >
+                        <TabsList>
+                          {course.video_preview && (
+                            <TabsTrigger value="video">Video</TabsTrigger>
+                          )}
+                          {course.CourseImages?.length > 0 && (
+                            <TabsTrigger value="images">Images</TabsTrigger>
+                          )}
+                        </TabsList>
+
+                        {course.video_preview && (
+                          <TabsContent value="video">
+                            <div className="w-full aspect-video mt-4">
+                              <iframe
+                                src={getEmbedUrl(course.video_preview)}
+                                className="w-full h-72 md:h-[400px] rounded-xl border"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                              ></iframe>
+                            </div>
+                          </TabsContent>
+                        )}
+
+                        {course.CourseImages?.length > 0 && (
+                          <TabsContent
+                            value="images"
+                            className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
+                          >
+                            {course.CourseImages.map((img, index) => (
+                              <img
+                                key={index}
+                                src={img}
+                                alt={`Preview ${index + 1}`}
+                                className="rounded-lg border shadow"
+                              />
+                            ))}
+                          </TabsContent>
+                        )}
+                      </Tabs>
+                    ) : (
+                      <div className="text-center text-gray-600 mt-4 text-sm">
+                        No preview exists for this course.
+                      </div>
+                    )}
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -157,7 +237,6 @@ export default function CourseDetailsPage() {
                 >
                   Requirements
                 </TabsTrigger>
-
                 <TabsTrigger
                   value="FAQ"
                   className="rounded-lg py-3 px-6 text-base cursor-pointer"
@@ -210,7 +289,7 @@ export default function CourseDetailsPage() {
                   {course.requirements.map((item, index) => (
                     <Card
                       key={index}
-                      className="border border-gray-200 p-4  rounded-2xl transition-all duration-300 hover:shadow-xl"
+                      className="border border-gray-200 p-4 rounded-2xl transition-all duration-300 hover:shadow-xl"
                     >
                       <div className="flex items-center gap-3">
                         <CircleCheck className="text-green-500" size={20} />
@@ -224,74 +303,73 @@ export default function CourseDetailsPage() {
               </TabsContent>
 
               <TabsContent value="FAQ">
-                <TabsContent value="FAQ">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                    Frequently Asked Questions
-                  </h2>
-                  <div className="space-y-4">
-                    {faqData.map((faq, index) => (
-                      <Card
-                        key={index}
-                        className={` bg-white overflow-hidden transition-all duration-200 ${
-                          openIndex === index
-                            ? 'border-primary/20  shadow-md bg-white'
-                            : 'border-gray-200 shadow-sm hover:border-primary/20'
-                        }`}
-                      >
-                        <CardContent className="p-0 bg-white">
-                          <button
-                            onClick={() => toggleFAQ(index)}
-                            className="flex justify-between  items-center w-full px-4 text-left focus:outline-none  focus:ring-primary/40 "
-                            aria-expanded={openIndex === index}
-                            aria-controls={`faq-answer-${index}`}
-                          >
-                            <h3 className="text-lg font-medium text-gray-900">
-                              {faq.question}
-                            </h3>
-                            <ChevronDown
-                              className={`h-5 w-5 text-primary transition-transform duration-300 ${
-                                openIndex === index ? 'rotate-180' : ''
-                              }`}
-                            />
-                          </button>
+                <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                  Frequently Asked Questions
+                </h2>
+                <div className="space-y-4">
+                  {faqData.map((faq, index) => (
+                    <Card
+                      key={index}
+                      className={`bg-white overflow-hidden rounded-2xl transition-all duration-200 ${
+                        openIndex === index
+                          ? 'border-primary/20 shadow-md'
+                          : 'border-gray-200 shadow-sm hover:border-primary/20 hover:shadow-md'
+                      }`}
+                    >
+                      <CardContent className="p-0 bg-white">
+                        <button
+                          onClick={() => toggleFAQ(index)}
+                          className="flex justify-between items-center w-full px-4 text-left focus:outline-none focus:ring-primary/40"
+                          aria-expanded={openIndex === index}
+                          aria-controls={`faq-answer-${index}`}
+                        >
+                          <h3 className="text-lg font-medium text-gray-900">
+                            {faq.question}
+                          </h3>
+                          <ChevronDown
+                            className={`h-5 w-5 text-primary transition-transform duration-300 ${
+                              openIndex === index ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
 
-                          <AnimatePresence>
-                            {openIndex === index && (
-                              <motion.div
-                                id={`faq-answer-${index}`}
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: 'auto', opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="bg-white px-5 mt-6 pb-5 pt-0  ">
-                                  <p className="text-gray-600 leading-relaxed">
-                                    {faq.answer}
-                                  </p>
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </TabsContent>
+                        <AnimatePresence>
+                          {openIndex === index && (
+                            <motion.div
+                              id={`faq-answer-${index}`}
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: 'auto', opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                              className="overflow-hidden"
+                            >
+                              <div className="bg-white px-5 mt-6 pb-5 pt-0">
+                                <p className="text-gray-600 leading-relaxed">
+                                  {faq.answer}
+                                </p>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </TabsContent>
             </Tabs>
           </div>
 
           <div>
-            <Card className="sticky top-6 border-0 shadow-md rounded-xl overflow-hidden">
+            <Card className="sticky top-6 border-0 shadow-md rounded-2xl overflow-hidden">
               <CardContent className="p-8">
                 <h3 className="text-xl font-bold text-gray-900 mb-6">
                   Course Details
                 </h3>
+                {/* ... (Course details content omitted for brevity) */}
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <Button
-                    className={`w-full rounded-xl cursor-pointer px-6 py-5 h-auto text-base font-medium ${
+                    className={`w-full rounded-xl cursor-pointer px-6 py-5 h-auto text-base font-medium transition-colors duration-300 ${
                       isInCart
                         ? 'bg-green-600 hover:bg-green-700'
                         : 'bg-orange-500 hover:bg-orange-600'
