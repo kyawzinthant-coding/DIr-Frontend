@@ -32,21 +32,17 @@ export default function CourseDetailsPage() {
   const { data } = useSuspenseQuery(CourseDetailsQuery(courseId));
 
   const course: CourseDetails = data.course;
-  const [isInCart, setIsInCart] = useState(false);
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const handleAddToCart = () => {
-    setIsInCart(true);
-  };
-
   const { addItem } = useCartStore();
   const { items } = useCartStore.getState();
 
-  const [previewOpen, setPreviewOpen] = useState(false);
+  console.log('course', course);
 
   function getEmbedUrl(videoUrl: string): string {
     try {
@@ -129,7 +125,7 @@ export default function CourseDetailsPage() {
                 <Button
                   onClick={() => addItem(course)}
                   size="lg"
-                  className={`rounded-xl px-8 py-6 md:w-[200px] cursor-pointer h-auto text-lg font-medium transition-colors duration-300 ${
+                  className={`rounded-xl px-8 py-6 md:w-[180px] cursor-pointer h-auto text-lg font-medium transition-colors duration-300 ${
                     items.some((i) => i.id === course.id)
                       ? 'bg-green-600 hover:bg-green-700'
                       : 'bg-orange-500 hover:bg-orange-600'
@@ -164,7 +160,7 @@ export default function CourseDetailsPage() {
                       <DialogTitle>Course Preview</DialogTitle>
                     </DialogHeader>
                     {course.video_preview ||
-                    (course.CourseImages && course.CourseImages.length > 0) ? (
+                    (course.CourseImage && course.CourseImage.length > 0) ? (
                       <Tabs
                         defaultValue={course.video_preview ? 'video' : 'images'}
                         className="mt-4"
@@ -173,7 +169,7 @@ export default function CourseDetailsPage() {
                           {course.video_preview && (
                             <TabsTrigger value="video">Video</TabsTrigger>
                           )}
-                          {course.CourseImages?.length > 0 && (
+                          {course.CourseImage?.length > 0 && (
                             <TabsTrigger value="images">Images</TabsTrigger>
                           )}
                         </TabsList>
@@ -191,15 +187,15 @@ export default function CourseDetailsPage() {
                           </TabsContent>
                         )}
 
-                        {course.CourseImages?.length > 0 && (
+                        {course.CourseImage?.length > 0 && (
                           <TabsContent
                             value="images"
                             className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
                           >
-                            {course.CourseImages.map((img, index) => (
+                            {course.CourseImage?.map((img, index) => (
                               <img
                                 key={index}
-                                src={img}
+                                src={img.image.url}
                                 alt={`Preview ${index + 1}`}
                                 className="rounded-lg border shadow"
                               />
@@ -252,31 +248,6 @@ export default function CourseDetailsPage() {
                   </h2>
                   <div className="prose max-w-none text-gray-600 text-lg space-y-4">
                     <p>{course.description}</p>
-                  </div>
-                </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                    What You'll Learn
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {/* [
-                        'Comprehensive understanding of core concepts',
-                        'Practical skills through hands-on exercises',
-                        'Problem-solving techniques for real-world scenarios',
-                        'Best practices and industry standards',
-                        'Advanced techniques for experienced learners',
-                        'Career guidance and professional development',
-                      ]
-                    ).map((point, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start bg-blue-50 p-4 rounded-xl"
-                      >
-                        <Check className="mr-3 h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700 text-lg">{point}</span>
-                      </div>
-                    )) */}
                   </div>
                 </div>
               </TabsContent>
@@ -365,19 +336,27 @@ export default function CourseDetailsPage() {
                 <h3 className="text-xl font-bold text-gray-900 mb-6">
                   Course Details
                 </h3>
+                <div className="mt-4 space-y-3">
+                  <p className="text-gray-600 font-medium">
+                    Format : {course.format}
+                  </p>
+                  <p className="text-gray-600 font-medium">
+                    Edition : {course.edition}
+                  </p>
+                </div>
                 {/* ... (Course details content omitted for brevity) */}
 
                 <div className="mt-8 pt-8 border-t border-gray-200">
                   <Button
                     className={`w-full rounded-xl cursor-pointer px-6 py-5 h-auto text-base font-medium transition-colors duration-300 ${
-                      isInCart
+                      items.some((item) => item.id === course.id)
                         ? 'bg-green-600 hover:bg-green-700'
                         : 'bg-orange-500 hover:bg-orange-600'
                     }`}
-                    onClick={handleAddToCart}
-                    disabled={isInCart}
+                    onClick={() => addItem(course)}
+                    disabled={items.some((item) => item.id === course.id)}
                   >
-                    {isInCart ? (
+                    {items.some((item) => item.id === course.id) ? (
                       <>
                         <Check className="mr-2 h-5 w-5" />
                         Added to Cart

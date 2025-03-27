@@ -1,6 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router';
 import React, { Suspense, useCallback, useMemo, useState } from 'react';
-import { Menu, ShoppingCart, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import logo from '../../assets/dirlogoC.svg';
 import { useAuthDataStore } from '@/store/authData';
@@ -32,13 +32,13 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between font-medium p-4">
+      <nav className="max-w-7xl mx-auto flex items-center justify-between font-medium ">
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
           <Link to="/">
-            <img src={logo} alt="Logo" loading="lazy" className="w-28" />
+            <img src={logo} alt="Logo" loading="lazy" className="w-28 " />
           </Link>
-          <p className="text-lg font-semibold">Digital Information Resources</p>
+          <p className="text-lg font-semibold">DIR</p>
         </div>
 
         {/* Desktop Navigation */}
@@ -64,12 +64,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Toggle */}
         <div className="flex md:hidden items-center gap-4">
           <Link to="/cart" className="relative">
-            <Button variant="ghost" size="icon">
-              <ShoppingCart className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
-                0
-              </span>
-            </Button>
+            <CartSheet />
           </Link>
 
           <Suspense fallback={null}>

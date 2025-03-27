@@ -8,7 +8,7 @@ import {
   Twitter,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+
 import { Separator } from '@/components/ui/separator';
 import { Link } from 'react-router';
 
@@ -59,24 +59,28 @@ export default function Footer() {
   );
 
   return (
-    <footer className="w-full  antialiased">
-      <div className="container px-4 py-12 md:px-6 md:py-16 lg:py-12">
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
-          <div className="flex flex-col gap-2 lg:col-span-2">
-            <Link to="/" className="flex items-center gap-2">
+    <footer className="w-full  py-12">
+      <div className="container px-6 md:px-12 lg:px-16 mx-auto">
+        <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
+          <div className="md:col-span-2 flex flex-col gap-4">
+            <Link to="/" className="flex items-center gap-2 text-xl font-bold">
               <BookOpen className="h-6 w-6" />
-              <span className="font-bold">LearnHub</span>
+              <span>DIR</span>
             </Link>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-gray-400">
               Empowering learners worldwide with high-quality online education.
               Our mission is to provide accessible, affordable, and effective
               learning experiences for everyone.
             </p>
-            <div className="mt-4 flex gap-4">
+            <div className="flex gap-4 mt-4">
               {socialLinks.map(({ icon: Icon, label, link }) => (
                 <Button key={label} variant="ghost" size="icon" asChild>
-                  <Link to={link} aria-label={label}>
-                    <Icon className="h-4 w-4" />
+                  <Link
+                    to={link}
+                    aria-label={label}
+                    className="hover:text-primary"
+                  >
+                    <Icon className="h-5 w-5" />
                   </Link>
                 </Button>
               ))}
@@ -84,14 +88,14 @@ export default function Footer() {
           </div>
 
           {links.map(({ title, items, paths }) => (
-            <div key={title} className="flex flex-col gap-2">
-              <h3 className="text-lg font-medium">{title}</h3>
-              <ul className="flex flex-col gap-2">
+            <div key={title} className="flex flex-col gap-3">
+              <h3 className="text-lg font-semibold text-white">{title}</h3>
+              <ul className="space-y-2">
                 {items.map((item, idx) => (
                   <li key={item}>
                     <Link
                       to={paths[idx]}
-                      className="text-sm text-muted-foreground hover:text-foreground"
+                      className="text-sm text-gray-400 hover:text-white"
                     >
                       {item}
                     </Link>
@@ -102,34 +106,16 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-8">
-          <h3 className="text-lg font-medium">Subscribe to our newsletter</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Get the latest news, updates and offers straight to your inbox.
-          </p>
-          <form className="mt-4 flex max-w-md flex-col gap-2 sm:flex-row">
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1"
-              required
-            />
-            <Button type="submit">Subscribe</Button>
-          </form>
-        </div>
+        <Separator className="my-6 border-gray-700" />
 
-        <Separator className="my-8" />
-
-        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-          <p className="text-xs text-muted-foreground">
-            © {currentYear} LearnHub. All rights reserved.
-          </p>
-          <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-400">
+          <p>© {currentYear} DIR. All rights reserved.</p>
+          <div className="flex gap-4 mt-3 sm:mt-0">
             {['Sitemap', 'Cookies', 'Preferences'].map((item) => (
               <Link
                 key={item}
                 to={`/${item.toLowerCase()}`}
-                className="text-xs text-muted-foreground hover:text-foreground"
+                className="hover:text-white"
               >
                 {item}
               </Link>

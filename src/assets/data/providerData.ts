@@ -16,8 +16,14 @@ export interface CourseDetails {
   requirements: string[];
   format: string;
   author: string[];
+  edition: true;
   video_preview?: string;
-  CourseImages: string[];
+  CourseImage: {
+    image: {
+      id: string;
+      url: string;
+    };
+  }[];
 }
 
 export interface course {
