@@ -42,7 +42,7 @@ export default function CourseDetailsPage() {
   const { addItem } = useCartStore();
   const { items } = useCartStore.getState();
 
-  console.log('course', course);
+
 
   function getEmbedUrl(videoUrl: string): string {
     try {
@@ -102,15 +102,13 @@ export default function CourseDetailsPage() {
             Back to Courses
           </Link>
 
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
-            <div className="w-full lg:w-80 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
+          <div className="flex flex-col lg:flex-row gap-8 items-start overflow-hidden">
+            <div className="w-full lg:w-80 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden">
               <img
                 src={course.previewImage.url}
                 alt={course.name}
                 loading="lazy"
-                width={300}
-                height={200}
-                className="w-full h-full object-contain"
+                className="w-full h-full rounded-2xl object-contain"
               />
             </div>
             <div className="flex-1">

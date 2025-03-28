@@ -37,7 +37,7 @@ export const logoutAction = async () => {
   try {
     await api.post('auth/logout');
   } catch (error) {
-    console.error('Logout failed:', error);
+    console.log('Logout failed:', error);
   }
 
   // Ensure user state is cleared even if API request fails

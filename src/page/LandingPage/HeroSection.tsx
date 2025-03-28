@@ -3,8 +3,10 @@ import hero from '../../assets/insiderImages/hero.png';
 import { Badge } from '@/components/ui/badge';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
+import { useAuthDataStore } from '@/store/authData';
 
 function HeroSection() {
+  const { user } = useAuthDataStore();
   return (
     <section
       className="w-full  py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
@@ -49,11 +51,20 @@ function HeroSection() {
                 </Button>
               </Link>
 
-              <Link to="/" aria-label="Sign up and start learning for free">
-                <Button size="lg" variant="outline">
-                  Get Started for Free
-                </Button>
-              </Link>
+              {user === null && (
+                <Link
+                  to="/login"
+                  aria-label="Sign up and start learning for free"
+                >
+                  <Button
+                    size="lg"
+                    className="cursor-pointer"
+                    variant="outline"
+                  >
+                    Get Started for Free
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
 

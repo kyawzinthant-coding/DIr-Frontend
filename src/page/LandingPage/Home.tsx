@@ -5,8 +5,11 @@ import Service from './Service';
 import StartLearning from './StartLearning';
 import { ChevronRight } from 'lucide-react';
 import { Link } from 'react-router';
+import { useAuthDataStore } from '@/store/authData';
 
 function Home() {
+  const { user } = useAuthDataStore();
+
   return (
     <main className="w-full p-6 lg:px-32 py-8 md:py-19 lg:py-24 xl:py-18  antialiased  h-full  overflow-x-hidden">
       <HeroSection />
@@ -28,12 +31,15 @@ function Home() {
                 limitless learning resources!
               </p>
             </div>
+
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Link to="/login">
-                <Button size="lg" className="gap-1.5 cursor-pointer">
-                  Get Started for Free <ChevronRight className="h-4 w-4" />
-                </Button>
-              </Link>
+              {user === null && (
+                <Link to="/login">
+                  <Button size="lg" className=" cursor-pointer">
+                    Get Started for Free <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
 
               <Link to="/providers">
                 <Button size="lg" className="cursor-pointer" variant="outline">

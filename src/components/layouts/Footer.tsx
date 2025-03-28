@@ -59,7 +59,7 @@ export default function Footer() {
   );
 
   return (
-    <footer className="w-full  py-12">
+    <footer className="w-full  py-12 text-black">
       <div className="container px-6 md:px-12 lg:px-16 mx-auto">
         <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
           <div className="md:col-span-2 flex flex-col gap-4">
@@ -93,10 +93,7 @@ export default function Footer() {
               <ul className="space-y-2">
                 {items.map((item, idx) => (
                   <li key={item}>
-                    <Link
-                      to={paths[idx]}
-                      className="text-sm text-gray-400 hover:text-white"
-                    >
+                    <Link to={paths[idx]} className="text-sm text-gray-400 ">
                       {item}
                     </Link>
                   </li>

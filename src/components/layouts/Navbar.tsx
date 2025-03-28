@@ -11,7 +11,6 @@ const CartSheet = React.lazy(() => import('./CartSheet'));
 const Navbar: React.FC = () => {
   const { user } = useAuthDataStore();
 
-  console.log(user);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { pathname } = useLocation();
 

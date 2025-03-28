@@ -42,14 +42,12 @@ const StartLearning = () => {
           <div className="grid gap-4 md:grid-cols-2">
             {providerData.providers.map((course: Provider) => (
               <Card key={course.id} className="overflow-hidden">
-                <div className="relative">
-                  <div className="flex items-center justify-center py-4">
+                <div className="relative space-y-2">
+                  <div className="flex items-center justify-center py-2">
                     <img
                       src={course.image.url}
                       loading="lazy"
                       alt={course.name}
-                      width={200}
-                      height={200}
                       className="w-[200px] h-full  object-contain rounded-2xl"
                     />
                   </div>

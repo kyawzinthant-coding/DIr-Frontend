@@ -34,18 +34,18 @@ export default function SeriesCoursesPage() {
             Back to {seriesData.name} Series
           </Link>
 
-          <div className="flex flex-col md:flex-row gap-8 items-start">
-            <div className="w-full md:w-64 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 lg:justify-start items-center ">
+            <div className="w-46 lg:w-56 h-full relative flex-shrink-0 rounded-2xl overflow-hidden ">
               <img
                 src={`${seriesData.image.url}`}
                 alt={seriesData.name}
                 loading="lazy"
-                className="w-full h-full object-contain max-h-60"
+                className="w-full rounded-xl object-contain "
                 /* Replaced object-fit with object-contain to keep series image fully visible and contained on small screens */
               />
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight">
+              <h1 className="text-2xl lg:text-4xl font-bold tracking-tight">
                 {seriesData.name}
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -105,18 +105,14 @@ export default function SeriesCoursesPage() {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {filteredCourses.map((course) => (
               <Link
                 to={`/providers/${providerId}/series/${seriesId}/courses/${course.id}`}
                 key={course.id}
                 className="block"
               >
-                <CourseCard
-                  key={course.id}
-                  course={course}
-                  series={seriesData}
-                />
+                <CourseCard key={course.id} course={course} />
               </Link>
             ))}
           </div>

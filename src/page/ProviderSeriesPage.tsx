@@ -40,27 +40,25 @@ export default function ProviderSeriesPage() {
   return (
     <div className="min-h-screen">
       <header className="bg-gradient-to-r from-orange-500 to-orange-600 text-white">
-        <div className="container mx-auto px-6 py-12">
+        <div className="container mx-auto px-6 lg:px-14 py-6">
           <Link
             to="/providers"
-            className="inline-flex items-center text-white hover:text-orange-100 transition-colors duration-300 mb-6 text-lg font-medium"
+            className="inline-flex items-center text-white hover:text-orange-100 transition-colors duration-300 md:mb-6 mb-2 text-lg font-medium"
           >
             <ArrowLeft size={20} className="mr-2" />
             Back to Providers
           </Link>
-          <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
-            <div className="w-full md:w-64 h-60 relative flex-shrink-0 rounded-2xl overflow-hidden shadow-lg">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-8 lg:justify-start items-start  overflow-hidden">
+            <div className="w-46 lg:w-56 h-full relative flex-shrink-0 rounded-2xl overflow-hidden ">
               <img
                 src={`${provider.image.url}`}
                 alt={provider.name}
-                width={300}
-                height={200}
                 loading="lazy"
-                className="w-full h-full object-contain"
+                className="w-full rounded-xl overflow-hidden  object-contain"
               />
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-bold tracking-tight">
+              <h1 className="text-2xl lg:text-4xl font-bold tracking-tight">
                 {provider.name}
               </h1>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -118,13 +116,16 @@ export default function ProviderSeriesPage() {
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {filteredSeries.map((series) => (
               <Card
                 key={series.id}
-                className="h-full overflow-hidden ring-1 ring-gray-200 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 border-0 shadow-md rounded-2xl"
+                className="h-full overflow-hidden ring-1 
+                ring-gray-200 transition-all duration-300 
+                hover:shadow-lg hover:-translate-y-1 border-0 
+                shadow-md rounded-2xl"
               >
-                <div className="w-full h-56 relative">
+                <div className="w-full h-46 relative">
                   <img
                     src={series.image.url}
                     alt={series.name}
@@ -138,19 +139,18 @@ export default function ProviderSeriesPage() {
                     </span>
                   </div>
                 </div>
-                <CardContent className="p-4">
-                  <h3 className="text-2xl font-bold text-gray-900">
+                <CardContent className="">
+                  <h3 className="md:text-2xl text-xl font-bold text-gray-900">
                     {series.name}
                   </h3>
-                  <p className="text-gray-600 mt-2 text-lg line-clamp-2">
-                    {series.description ||
-                      `A comprehensive series designed to help you master ${series.category.name} skills.`}
+                  <p className="text-gray-600 mt-2 text-md line-clamp-2">
+                    {series.description}
                   </p>
                   <div className="flex items-center mt-4">
                     {series._count.courses > 0 ? (
                       <Badge
                         variant="outline"
-                        className="flex items-center gap-1 text-sm font-normal px-3 py-1 border-blue-200 text-blue-700 dark:border-blue-800 dark:text-blue-400"
+                        className="flex items-center gap-1 text-xs font-normal px-3 py-1 border-blue-200 text-blue-700 dark:border-blue-800 dark:text-blue-400"
                       >
                         <BookOpen className="w-3.5 h-3.5" />
                         {series._count.courses} Courses Available
@@ -158,7 +158,7 @@ export default function ProviderSeriesPage() {
                     ) : (
                       <Badge
                         variant="outline"
-                        className="flex items-center gap-1 text-sm font-normal px-3 py-1 border-emerald-200 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400"
+                        className="flex items-center gap-1 text-xs font-normal px-3 py-1 border-emerald-200 text-emerald-700 dark:border-emerald-800 dark:text-emerald-400"
                       >
                         <Clock className="w-3.5 h-3.5" />
                         Coming Soon
@@ -176,7 +176,7 @@ export default function ProviderSeriesPage() {
                       }
                     }}
                     disabled={series._count.courses === 0}
-                    className={`group w-full rounded-xl cursor-pointer py-6 text-base font-medium transition-all duration-300 ${
+                    className={`group w-full rounded-xl cursor-pointer py-5 text-base font-medium transition-all duration-300 ${
                       series._count.courses > 0
                         ? 'bg-orange-600 hover:bg-orange-700'
                         : 'bg-gray-400 cursor-not-allowed'
@@ -184,7 +184,7 @@ export default function ProviderSeriesPage() {
                   >
                     {series._count.courses > 0 ? 'View Courses' : 'Coming Soon'}
                     {series._count.courses > 0 && (
-                      <ArrowRight className="w-4 h-4 ml-2 opacity-80 group-hover:translate-x-1 transition-transform duration-300" />
+                      <ArrowRight className="w-4 h-4 ml-2 font-bold opacity-80 group-hover:translate-x-1 transition-transform duration-300" />
                     )}
                   </Button>
                 </CardFooter>
