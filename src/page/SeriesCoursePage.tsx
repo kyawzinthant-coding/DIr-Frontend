@@ -99,13 +99,12 @@ export default function SeriesCoursesPage() {
               variant="link"
               className="text-blue-600 mt-4 text-lg cursor-pointer"
               onClick={() => setSearchQuery('')}
-              /* Ensured the Clear search link shows a pointer cursor */
             >
               Clear search
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {filteredCourses.map((course) => (
               <Link
                 to={`/providers/${providerId}/series/${seriesId}/courses/${course.id}`}

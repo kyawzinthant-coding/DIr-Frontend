@@ -1,5 +1,6 @@
 import React from 'react';
 import { Suspense, lazy, ElementType } from 'react';
+import Loader from './lib/Loader';
 
 const Loadable =
   <Props extends Record<string, unknown>>(Component: ElementType) =>
@@ -7,7 +8,7 @@ const Loadable =
     <Suspense
       fallback={
         <div className="w-full h-full flex justify-center items-center">
-          <p>Loading Component come here</p>
+          <Loader />
         </div>
       }
     >

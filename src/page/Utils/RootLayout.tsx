@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { Suspense, useEffect } from 'react';
+import { useEffect } from 'react';
 import { fetchMe } from '@/api/query';
 import { useAuthDataStore } from '@/store/authData';
 import { useQuery } from '@tanstack/react-query';
@@ -34,18 +34,14 @@ function RootLayout() {
 
   return (
     <div className="min-h-screen bg-white/80 flex flex-col">
-      <Suspense fallback={<div>Loading Navbar...</div>}>
-        <Navbar />
-      </Suspense>
+      <Navbar />
 
       <ProgressBar />
       <main className="flex-1">
         <Outlet />
       </main>
 
-      <Suspense fallback={<div>Loading Footer...</div>}>
-        <Footer />
-      </Suspense>
+      <Footer />
     </div>
   );
 }
