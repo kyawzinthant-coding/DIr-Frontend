@@ -9,11 +9,11 @@ function HeroSection() {
   const { user } = useAuthDataStore();
   return (
     <section
-      className="w-full  py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
+      className="w-full py-6 md:py-8 lg:py-12 bg-gradient-to-b from-background to-muted/30"
       aria-labelledby="hero-heading"
     >
-      <div className="container px-4 md:px-8 lg:px-12">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 h-auto items-center">
+      <div className="px-2 md:px-4 lg:px-12">
+        <div className="grid gap-6 md:gap-8 lg:grid-cols-2 lg:gap-12 h-auto items-center">
           {/* Left Section */}
           <div className="flex flex-col justify-center space-y-6 text-center lg:text-left">
             <div className="space-y-4">
@@ -27,14 +27,14 @@ function HeroSection() {
 
               <h1
                 id="hero-heading"
-                className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl max-w-[700px] mx-auto lg:mx-0"
+                className="text-xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-6xl max-w-[700px] mx-auto lg:mx-0"
               >
                 Inspire Young Minds with Engaging Learning!
               </h1>
 
               <h2 className="sr-only">Interactive Courses for Kids</h2>
 
-              <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed mx-auto lg:mx-0">
+              <p className="max-w-[600px] text-muted-foreground md:text-sm lg:text-xl leading-relaxed mx-auto lg:mx-0">
                 Empower kids with interactive courses from Digital Kids,
                 National Geographic Learning & more. Fun, engaging, and designed
                 for young learners!
@@ -69,7 +69,7 @@ function HeroSection() {
           </div>
 
           {/* Right Section - Image */}
-          <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] w-full max-w-[600px] mx-auto lg:mx-0 overflow-hidden rounded-xl">
+          <div className="relative h-[250px] sm:h-[300px] md:h-[300px] lg:h-[300px] w-full max-w-[600px] mx-auto lg:mx-0 overflow-hidden rounded-xl">
             <img
               src={hero}
               decoding="async"

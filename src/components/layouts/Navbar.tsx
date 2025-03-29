@@ -30,8 +30,8 @@ const Navbar: React.FC = () => {
   );
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="max-w-7xl mx-auto flex items-center justify-between font-medium ">
+    <header className="sticky px-12  top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="  max-w-7xl mx-auto flex items-center justify-between font-medium ">
         {/* Logo Section */}
         <div className="flex items-center space-x-2">
           <Link to="/">
