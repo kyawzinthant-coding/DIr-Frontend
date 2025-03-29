@@ -42,37 +42,38 @@ export default function OurServices() {
 
   return (
     <section
-      className="w-full py-2 md:py-24 lg:py-28 "
+      className="w-full py-8 md:py-24 lg:py-28 "
       aria-labelledby="our-services-heading"
     >
       <div className="container px-4 md:px-12">
         {/* Section Header */}
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <span className="inline-block rounded-lg  px-3 py-1 bg-[#F2F5F9] text-md text-gray-800">
+            <span className="inline-block rounded-lg px-3 py-1 bg-[#F2F5F9] text-md text-gray-800">
               Our Services
             </span>
             <h2
               id="our-services-heading"
-              className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl"
+              className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl"
             >
               Designed for Young Learners
             </h2>
-            <p className="max-w-[900px] text-lg text-gray-600 md:text-xl/relaxed">
+            <p className="max-w-[900px] text-lg text-gray-600 md:text-xl">
               We're committed to providing the best educational experience with
               features designed to help you succeed.
             </p>
           </div>
         </div>
 
+        {/* Services Grid */}
         <div
-          className="mx-auto grid max-w-8xl grid-cols-1 gap-8 py-16 md:grid-cols-2 lg:grid-cols-3"
+          className="mx-auto grid max-w-8xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 py-10 md:py-16"
           role="list"
         >
           {services.map((service) => (
             <Card
               key={service.id}
-              className="relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-2 rounded-lg"
+              className="relative flex flex-col overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-2 rounded-lg"
               role="listitem"
               aria-labelledby={`service-${service.id}-title`}
             >
@@ -88,7 +89,7 @@ export default function OurServices() {
               <CardHeader>
                 <CardTitle
                   id={`service-${service.id}-title`}
-                  className="text-2xl font-semibold text-gray-900"
+                  className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-900"
                 >
                   {service.title}
                 </CardTitle>
@@ -97,11 +98,11 @@ export default function OurServices() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-base text-gray-700 leading-relaxed">
+                <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                   {service.content}
                 </p>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="mt-auto">
                 <Button
                   variant="ghost"
                   className="gap-1 p-0 text-[#2563EB] hover:text-[#1D4ED8] cursor-pointer transition-all"

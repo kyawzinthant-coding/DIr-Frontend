@@ -16,14 +16,14 @@ const StartLearning = () => {
   const { data: providerData } = useSuspenseQuery(providerQuery('?limits=4'));
   return (
     <section className="w-full py-6 md:py-24 lg:py-12 ">
-      <div className="container px-4 md:px-12">
+      <div className="container px-4 ">
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
               <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
                 Featured Providers
               </div>
-              <h2 className="text-3xl md:w-[550px] font-bold tracking-tighter md:text-6xl/tight">
+              <h2 className="text-3xl lg:w-[550px] md:w-[300px] xl:text-6xl/tight font-bold tracking-tighter md:text-2xl/tight">
                 Start browsing Today From Best Providers
               </h2>
               <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -39,16 +39,16 @@ const StartLearning = () => {
               </Link>
             </div>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-2 md:grid-cols-2">
             {providerData.providers.map((course: Provider) => (
               <Card key={course.id} className="overflow-hidden">
-                <div className="relative space-y-2">
-                  <div className="flex items-center justify-center py-2">
+                <div className="relative space-y-1">
+                  <div className="flex items-center  justify-center py-2">
                     <img
                       src={course.image.url}
                       loading="lazy"
                       alt={course.name}
-                      className="w-[200px] h-full  object-contain rounded-2xl"
+                      className="lg:w-[100px] xl:w-[200px] md:w-[150px] w-[100px] h-full  object-contain rounded-2xl"
                     />
                   </div>
 
@@ -68,7 +68,7 @@ const StartLearning = () => {
                     </Button>
                   </Link>
                 </div>
-                <CardHeader className="p-4">
+                <CardHeader className="xl:p-4 p-2 space-y-1">
                   <CardTitle className="line-clamp-1">{course.name}</CardTitle>
                   <CardDescription>{course.description}</CardDescription>
                 </CardHeader>
