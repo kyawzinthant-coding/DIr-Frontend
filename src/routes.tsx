@@ -11,6 +11,7 @@ const Contact = lazy(() => import('@/page/LandingPage/Contact'));
 const Login = lazy(() => import('./features/auth/Login'));
 const SignUpPage = lazy(() => import('@/features/auth/SignUp'));
 const Register = lazy(() => import('./features/auth/Register'));
+const About = lazy(() => import('@/page/LandingPage/About'));
 
 import {
   createaccountAction,
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: 'checkout',
         element: <CheckOut />,
+      },
+      {
+        path: 'about',
+        element: withSuspense(About),
       },
       {
         path: 'providers',

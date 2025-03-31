@@ -55,7 +55,7 @@ function AboutUs() {
               </p>
               <p>
                 At DIR, we collaborate with top educational publishers like
-                National Geographic Learning and Digital Kids to provide
+                National Geographic Learning and Binary Logic to provide
                 engaging and curriculum-aligned learning resources.
               </p>
               <p>
