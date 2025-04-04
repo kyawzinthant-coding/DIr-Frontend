@@ -49,17 +49,25 @@ export default function Footer() {
 
   const socialLinks = useMemo(
     () => [
-      { icon: Facebook, label: 'Facebook', link: '#' },
-      { icon: Twitter, label: 'Twitter', link: '#' },
-      { icon: Instagram, label: 'Instagram', link: '#' },
+      {
+        icon: Facebook,
+        label: 'Facebook',
+        link: 'https://www.facebook.com/share/15tnQ6u5Uh/',
+      },
+      // { icon: Twitter, label: 'Twitter', link: '#' },
+      {
+        icon: Instagram,
+        label: 'Instagram',
+        link: 'https://www.instagram.com/myintthukhanadi2005?igsh=dGFsdHR4ZzlyNXc3',
+      },
       { icon: Linkedin, label: 'LinkedIn', link: '#' },
-      { icon: Github, label: 'GitHub', link: '#' },
+      // { icon: Github, label: 'GitHub', link: '#' },
     ],
     []
   );
 
   return (
-    <footer className="w-full  py-12 text-black">
+    <footer className="w-full  py-2 text-black">
       <div className="container px-6 md:px-12 lg:px-16 mx-auto">
         <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
           <div className="md:col-span-2 flex flex-col gap-4">

@@ -120,33 +120,38 @@ export default function ProviderSeriesPage() {
             {filteredSeries.map((series) => (
               <Card
                 key={series.id}
-                className="h-full overflow-hidden ring-1 
-                ring-gray-200 transition-all duration-300 
-                hover:shadow-lg hover:-translate-y-1 border-0 
-                shadow-md rounded-2xl"
+                className="flex flex-col justify-between h-[500px] overflow-hidden ring-1 
+              ring-gray-200 transition-all duration-300 
+              hover:shadow-lg hover:-translate-y-1 border-0 
+              shadow-md rounded-2xl"
               >
-                <div className="w-full h-46 relative">
+                <div className="w-full h-[200px] bg-white relative overflow-hidden flex items-center justify-center rounded-t-2xl">
                   <img
                     src={series.image.url}
                     alt={series.name}
                     loading="lazy"
-                    className="w-full h-full object-contain"
+                    className="h-full w-auto max-h-[160px] object-contain"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     <span className="px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full">
                       {series.category.name}
                     </span>
                   </div>
                 </div>
-                <CardContent className="">
-                  <h3 className="md:text-2xl text-xl font-bold text-gray-900">
-                    {series.name}
-                  </h3>
-                  <p className="text-gray-600 mt-2 text-md line-clamp-2">
-                    {series.description}
-                  </p>
-                  <div className="flex items-center mt-4">
+
+                <CardContent className="flex flex-col flex-grow px-4 pt-4 pb-2">
+                  <div className="flex-grow">
+                    <h3 className="md:text-2xl text-xl font-bold text-gray-900">
+                      {series.name}
+                    </h3>
+                    <p className="text-gray-600 mt-2 text-md line-clamp-3 min-h-[72px]">
+                      {series.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-4">
                     {series._count.courses > 0 ? (
                       <Badge
                         variant="outline"
@@ -166,6 +171,7 @@ export default function ProviderSeriesPage() {
                     )}
                   </div>
                 </CardContent>
+
                 <CardFooter className="px-4 pt-0 pb-4">
                   <Button
                     onClick={() => {
@@ -184,7 +190,7 @@ export default function ProviderSeriesPage() {
                   >
                     {series._count.courses > 0 ? 'View Courses' : 'Coming Soon'}
                     {series._count.courses > 0 && (
-                      <ArrowRight className="w-4 h-4 ml-2 font-bold opacity-80 group-hover:translate-x-1 transition-transform duration-300" />
+                      <ArrowRight className="w-4 h-4 ml-2 opacity-80 group-hover:translate-x-1 transition-transform duration-300" />
                     )}
                   </Button>
                 </CardFooter>

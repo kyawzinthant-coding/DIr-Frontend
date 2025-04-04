@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import dirLogo from '../../assets/insiderImages/ResizedAboutUs.jpg';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router';
 
 function AboutUs() {
   const ref = useRef(null);
@@ -64,13 +65,19 @@ function AboutUs() {
               </p>
             </div>
             <div className="flex flex-col gap-2 min-[400px]:flex-row">
-              <Button
-                size="lg"
-                variant="outline"
-                className="gap-1.5 cursor-pointer"
+              <Link
+                to={'/about'}
+                aria-label="Learn more about us"
+                className="w-full min-[400px]:w-auto"
               >
-                Learn More About Us <ChevronRight className="h-4 w-4" />
-              </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-1.5 cursor-pointer"
+                >
+                  Learn More About Us <ChevronRight className="h-4 w-4" />
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

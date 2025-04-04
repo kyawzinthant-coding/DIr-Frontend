@@ -11,12 +11,12 @@ function Home() {
   const { user } = useAuthDataStore();
 
   return (
-    <main className="w-full p-6 lg:px-32 py-8 md:py-19 lg:py-24 xl:py-18  antialiased  h-full  overflow-x-hidden">
+    <main className="w-full p-6 lg:px-32 py-8 md:py-19 lg:py-16 xl:py-14  antialiased  h-full  overflow-x-hidden">
       <HeroSection />
       <Service />
       <StartLearning />
       <AboutUs />
-      <section className="w-full py-12 md:py-24 lg:py-12 ">
+      <section className="w-full py-9 md:py-20 lg:py-6">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-2">
@@ -24,7 +24,7 @@ function Home() {
                 Join Our Community
               </div>
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Browsse Your Learning Journey Today
+                Browse Your Learning Journey Today
               </h2>
               <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Join us in shaping the future of digital education and unlocking
